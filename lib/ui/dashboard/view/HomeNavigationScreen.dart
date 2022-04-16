@@ -91,7 +91,6 @@ class _HomeScreenNavigationState extends State<HomeScreenNavigation> {
               ),
             ],
           ),
-
         ),
       ),
     );

@@ -6,6 +6,7 @@ import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:provider/provider.dart';
 import 'package:sb_portal/ui/auth/model/CommonModel.dart';
 import 'package:sb_portal/ui/auth/view/SellerLogin.dart';
+import 'package:sb_portal/ui/dashboard/model/CategoryModel.dart';
 import 'package:sb_portal/ui/dashboard/model/ProductCategoryModel.dart';
 import 'package:sb_portal/ui/dashboard/model/ProductListModel.dart';
 import 'package:sb_portal/ui/dashboard/model/SliderModel.dart';
@@ -14,6 +15,7 @@ import 'package:sb_portal/ui/dashboard/model/WIthOutLoginProductListModel.dart';
 import 'package:sb_portal/ui/dashboard/provider/HomeProvider.dart';
 import 'package:sb_portal/ui/dashboard/view/without_login/CategoryNameScreen.dart';
 import 'package:sb_portal/ui/dashboard/view/without_login/widget/WithOutLoginSidemenu.dart';
+import 'package:sb_portal/ui/helper/category_list.dart';
 import 'package:sb_portal/utils/NavKey.dart';
 import 'package:sb_portal/utils/app_colors.dart';
 import 'package:sb_portal/utils/app_font.dart';
@@ -35,8 +37,7 @@ class _WithOutLoginNavigationState extends State<WithOutLoginNavigation> {
 
   ProductCategoryModel productCategoryModel = ProductCategoryModel();
   SliderModel sliderModel = SliderModel();
-  WIthOutLoginProductListModel productListModel =
-      WIthOutLoginProductListModel();
+  WIthOutLoginProductListModel productListModel = WIthOutLoginProductListModel();
   Category? categoryData;
   HomeProvider? mHomeProvider;
   final TextEditingController _searchController = TextEditingController();
@@ -96,7 +97,12 @@ class _WithOutLoginNavigationState extends State<WithOutLoginNavigation> {
                           Scaffold.of(context).openDrawer();
                         },
                       ),
-                      Expanded(child: Image.asset(APPImages.IC_SPLASH_LOGO, height: 73, width: 73,)),
+                      Expanded(
+                          child: Image.asset(
+                        APPImages.IC_SPLASH_LOGO,
+                        height: 73,
+                        width: 73,
+                      )),
                       IconButton(
                         color: Colors.black,
                         icon: const Icon(Icons.notifications),
@@ -115,10 +121,7 @@ class _WithOutLoginNavigationState extends State<WithOutLoginNavigation> {
   }
 
   _onWillPop() {
-    DialogSingleClick.showCustomDialog(context,
-        title: 'Do you want to exit an app',
-        okBtnText: 'OK',
-        cancelBtnText: 'Cancel', okBtnFunction: () {
+    DialogSingleClick.showCustomDialog(context, title: 'Do you want to exit an app', okBtnText: 'OK', cancelBtnText: 'Cancel', okBtnFunction: () {
       SystemChannels.platform.invokeMethod('SystemNavigator.pop');
     });
   }
@@ -133,27 +136,20 @@ class _WithOutLoginNavigationState extends State<WithOutLoginNavigation> {
                 const SizedBox(height: 12),
                 productCategoryModel.results != null
                     ? Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 0),
+                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
                         child: Container(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 16, vertical: 8),
+                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                           decoration: BoxDecoration(
                             color: AppColors.colorWhite,
-                            border: Border.all(
-                                color: AppColors.colorBorder, width: 1.0),
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(6)),
+                            border: Border.all(color: AppColors.colorBorder, width: 1.0),
+                            borderRadius: const BorderRadius.all(Radius.circular(6)),
                           ),
                           child: DropdownButton<Category>(
-                            hint: categoryData == null
-                                ? const Text('Select Category')
-                                : Text(categoryData!.categoryName!),
+                            hint: categoryData == null ? const Text('Select Category') : Text(categoryData!.categoryName!),
                             underline: Container(),
                             isExpanded: true,
                             isDense: true,
-                            items: productCategoryModel.results!.category!
-                                .map((Category value) {
+                            items: productCategoryModel.results!.category!.map((Category value) {
                               return DropdownMenuItem<Category>(
                                 value: value,
                                 child: Text(value.categoryName!),
@@ -170,15 +166,12 @@ class _WithOutLoginNavigationState extends State<WithOutLoginNavigation> {
                     : const SizedBox(),
                 const SizedBox(height: 10),
                 Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
                   child: Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
+                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
                     decoration: BoxDecoration(
                       color: AppColors.colorWhite,
-                      border:
-                          Border.all(color: AppColors.colorBorder, width: 1.0),
+                      border: Border.all(color: AppColors.colorBorder, width: 1.0),
                       borderRadius: const BorderRadius.all(Radius.circular(6)),
                     ),
                     child: Row(
@@ -197,8 +190,7 @@ class _WithOutLoginNavigationState extends State<WithOutLoginNavigation> {
                                 isDense: true,
                                 hintText: 'Search Product',
                                 hintStyle: AppFont.NUNITO_REGULAR_BLACK_14,
-                                floatingLabelBehavior:
-                                    FloatingLabelBehavior.never,
+                                floatingLabelBehavior: FloatingLabelBehavior.never,
                                 border: InputBorder.none),
                           ),
                         ),
@@ -210,8 +202,7 @@ class _WithOutLoginNavigationState extends State<WithOutLoginNavigation> {
                   ),
                 ),
                 const SizedBox(height: 12),
-                productListModel.results != null &&
-                        productListModel.results!.product!.isNotEmpty
+                productListModel.results != null && productListModel.results!.product!.isNotEmpty
                     ? Padding(
                         padding: const EdgeInsets.only(left: 12, right: 12),
                         child: SizedBox(
@@ -225,38 +216,25 @@ class _WithOutLoginNavigationState extends State<WithOutLoginNavigation> {
                             // controller: _pageController,
                             itemBuilder: (context, index) {
                               return Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 8),
+                                padding: const EdgeInsets.symmetric(horizontal: 8),
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Container(
                                       decoration: BoxDecoration(
                                         color: AppColors.colorLightBlueGrey,
-                                        border: Border.all(
-                                            color: AppColors.colorBorder,
-                                            width: 1.0),
-                                        borderRadius: const BorderRadius.all(
-                                            Radius.circular(16)),
+                                        border: Border.all(color: AppColors.colorBorder, width: 1.0),
+                                        borderRadius: const BorderRadius.all(Radius.circular(16)),
                                       ),
                                       child: Image.network(
                                         introWidgetsList[index].image!,
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                90 /
-                                                100,
+                                        width: MediaQuery.of(context).size.width * 90 / 100,
                                         height: 204,
                                         fit: BoxFit.fill,
-                                        errorBuilder: (BuildContext? context,
-                                            Object? exception,
-                                            StackTrace? stackTrace) {
+                                        errorBuilder: (BuildContext? context, Object? exception, StackTrace? stackTrace) {
                                           return Image.asset(
                                             APPImages.icError,
-                                            width: MediaQuery.of(context!)
-                                                    .size
-                                                    .width *
-                                                90 /
-                                                100,
+                                            width: MediaQuery.of(context!).size.width * 90 / 100,
                                             height: 204,
                                           );
                                         },
@@ -272,76 +250,21 @@ class _WithOutLoginNavigationState extends State<WithOutLoginNavigation> {
                       )
                     : const SizedBox(),
                 const SizedBox(height: 18),
-                productListModel.results != null &&
-                        productListModel.results!.product!.isNotEmpty
+                productListModel.results != null && productListModel.results!.product!.isNotEmpty
                     ? Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: GridView.count(
-                          crossAxisCount: 2,
-                          crossAxisSpacing: 8.0,
-                          mainAxisSpacing: 8.0,
+                        child: GridView.builder(
                           shrinkWrap: true,
-                          primary: false,
                           physics: const NeverScrollableScrollPhysics(),
-                          children: List.generate(
-                              productListModel.results!.product!.length,
-                              (index) {
-                            return Padding(
-                              padding: const EdgeInsets.all(0.0),
-                              child: InkWell(
-                                onTap: () {
-                                  NavKey.navKey.currentState!.push(
-                                      MaterialPageRoute(
-                                          builder: (_) =>
-                                              const CategoryNameScreen()));
-                                },
-                                child: Column(
-                                  children: [
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        color: AppColors.colorLightBlueGrey,
-                                        border: Border.all(
-                                            color: AppColors.colorBorder,
-                                            width: 1.0),
-                                        borderRadius: const BorderRadius.all(
-                                            Radius.circular(8)),
-                                      ),
-                                      child: Column(
-                                        children: [
-                                          Image.network(
-                                            productListModel.results!
-                                                .product![index].image1!,
-                                            fit: BoxFit.fill,
-                                            height: 88,
-                                            width: 129,
-                                            errorBuilder:
-                                                (BuildContext? context,
-                                                    Object? exception,
-                                                    StackTrace? stackTrace) {
-                                              return Image.asset(
-                                                APPImages.icError,
-                                                height: 88,
-                                                width: 129,
-                                              );
-                                            },
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Text(productListModel
-                                                .results!
-                                                .product![index]
-                                                .productName!,
-                                            style: AppFont.NUNITO_REGULAR_DARK_BLACK_14,),
-                                          )
-                                        ],
-                                      ),
-                                      clipBehavior: Clip.antiAliasWithSaveLayer,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            );
-                          }),
+                          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 3,
+                            crossAxisSpacing: 5.0,
+                            childAspectRatio: 10 / 11,
+                          ),
+                          itemCount: catModel.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return catItem(catModel[index]);
+                          },
                         ),
                       )
                     : const SizedBox(),
@@ -415,6 +338,57 @@ class _WithOutLoginNavigationState extends State<WithOutLoginNavigation> {
     );
   }
 
+  Widget catItem(CategoryModel catItem) {
+    return Padding(
+      padding: const EdgeInsets.all(5.0),
+      child: Card(
+        color: AppColors.colorLightBlueGrey,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+        ),
+        child: Column(
+          // mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Expanded(
+              flex: 2,
+              child: ClipRRect(
+                clipBehavior: Clip.hardEdge,
+                borderRadius: const BorderRadius.only(topLeft: Radius.circular(10.0), topRight: Radius.circular(10.0)),
+                child: Image.asset(
+                  catItem.image,
+                  // height: MediaQuery.of(context).size.height * 0.1,
+                  fit: BoxFit.contain,
+                  width: 46,
+                  height: 46,
+                  errorBuilder: (context, error, stackTrace) {
+                    return const Icon(
+                      Icons.error_outline,
+                      color: AppColors.PRIMARY_TEXT_COLOR,
+                      size: 30,
+                    );
+                  },
+                ),
+              ),
+            ),
+            const SizedBox(height: 10),
+            Padding(
+              padding: const EdgeInsets.only(left: 8.0, right: 8.0, bottom: 20),
+              child: Center(
+                child: Text(
+                  catItem.name,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 12),
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
   void getChangedPageAndMoveBar(int page) {
     currentPageValue = page;
     setState(() {
@@ -424,8 +398,7 @@ class _WithOutLoginNavigationState extends State<WithOutLoginNavigation> {
 
   callProductListApi() async {
     var connectivityResult = await (Connectivity().checkConnectivity());
-    if (connectivityResult == ConnectivityResult.mobile ||
-        connectivityResult == ConnectivityResult.wifi) {
+    if (connectivityResult == ConnectivityResult.mobile || connectivityResult == ConnectivityResult.wifi) {
       mHomeProvider!.productListWithOutSellerId().then((value) {
         if (value != null) {
           try {
@@ -453,8 +426,7 @@ class _WithOutLoginNavigationState extends State<WithOutLoginNavigation> {
 
   callSliderApi() async {
     var connectivityResult = await (Connectivity().checkConnectivity());
-    if (connectivityResult == ConnectivityResult.mobile ||
-        connectivityResult == ConnectivityResult.wifi) {
+    if (connectivityResult == ConnectivityResult.mobile || connectivityResult == ConnectivityResult.wifi) {
       mHomeProvider!.sliders().then((value) {
         if (value != null) {
           try {
@@ -482,8 +454,7 @@ class _WithOutLoginNavigationState extends State<WithOutLoginNavigation> {
 
   callProductCategoryListApi() async {
     var connectivityResult = await (Connectivity().checkConnectivity());
-    if (connectivityResult == ConnectivityResult.mobile ||
-        connectivityResult == ConnectivityResult.wifi) {
+    if (connectivityResult == ConnectivityResult.mobile || connectivityResult == ConnectivityResult.wifi) {
       mHomeProvider!.getProductCategory().then((value) {
         if (value != null) {
           try {
@@ -514,8 +485,7 @@ class _WithOutLoginNavigationState extends State<WithOutLoginNavigation> {
     }
 
     for (var userDetail in productListModel.results!.product!) {
-      if (userDetail.productName!.toLowerCase().contains(text.toLowerCase()) ||
-          userDetail.categoryname!.toString().contains(text.toLowerCase())) {
+      if (userDetail.productName!.toLowerCase().contains(text.toLowerCase()) || userDetail.categoryname!.toString().contains(text.toLowerCase())) {
         searchProd.add(userDetail);
       }
     }
