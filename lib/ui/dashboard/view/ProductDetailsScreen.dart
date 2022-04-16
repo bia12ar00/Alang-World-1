@@ -9,10 +9,7 @@ import 'package:sb_portal/ui/auth/model/CommonModel.dart';
 import 'package:sb_portal/ui/dashboard/model/AddProductModel.dart';
 import 'package:sb_portal/ui/dashboard/model/ProductListModel.dart';
 import 'package:sb_portal/ui/dashboard/provider/HomeProvider.dart';
-import 'package:sb_portal/ui/dashboard/view/EditProductScreen.dart';
-import 'package:sb_portal/utils/NavKey.dart';
 import 'package:sb_portal/utils/app_colors.dart';
-import 'package:sb_portal/utils/app_font.dart';
 import 'package:sb_portal/utils/app_images.dart';
 import 'package:sb_portal/utils/app_string.dart';
 import 'package:sb_portal/utils/app_widgets.dart';
@@ -83,7 +80,10 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   )),
                   IconButton(
                     color: Colors.black,
-                    icon: const Icon(Icons.delete,size: 30,),
+                    icon: const Icon(
+                      Icons.delete,
+                      size: 30,
+                    ),
                     onPressed: delete,
                   ),
                 ],
@@ -103,29 +103,29 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 child: Container(
                   margin: const EdgeInsets.symmetric(horizontal: 5),
                   child: CarouselSlider.builder(
-                    itemCount:  listOfImages.length,
+                    itemCount: listOfImages.length,
                     options: CarouselOptions(
-                      enlargeCenterPage: true,
-                      height: 300,
-                      autoPlay: true,
-                      autoPlayInterval: const Duration(seconds: 3),
-                      reverse: false,
-                      aspectRatio: 5.0,
-                      viewportFraction: 1.0,
-                       onPageChanged: (index, reason) {
-                         setState(() {
-                           _currentIndex = index;
-                         });
-                       }
-                    ),
-                    itemBuilder: (context, i, id){
+                        enlargeCenterPage: true,
+                        height: 300,
+                        autoPlay: true,
+                        autoPlayInterval: const Duration(seconds: 3),
+                        reverse: false,
+                        aspectRatio: 5.0,
+                        viewportFraction: 1.0,
+                        onPageChanged: (index, reason) {
+                          setState(() {
+                            _currentIndex = index;
+                          });
+                        }),
+                    itemBuilder: (context, i, id) {
                       //for onTap to redirect to another screen
                       return GestureDetector(
                         child: Container(
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(7),
-                              border: Border.all(color: Colors.white,)
-                          ),
+                              border: Border.all(
+                                color: Colors.white,
+                              )),
                           //ClipRRect for image border radius
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(7),
@@ -173,27 +173,19 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               const SizedBox(height: 10),
               Text(
                 widget.product!.productName!,
-                style: TextStyle(
-                    color: Colors.black.withOpacity(0.9),
-                    fontFamily: 'RobotRegular',
-                    fontWeight: FontWeight.w500,
-                    fontSize: 22),
+                style: TextStyle(color: Colors.black.withOpacity(0.9), fontFamily: 'RobotRegular', fontWeight: FontWeight.w500, fontSize: 22),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     widget.product!.categoryname!,
-                    style: TextStyle(
-                        color: Colors.black.withOpacity(0.9),
-                        fontFamily: 'RobotRegular'),
+                    style: TextStyle(color: Colors.black.withOpacity(0.9), fontFamily: 'RobotRegular'),
                   ),
                   Container(
                     height: 25,
                     padding: const EdgeInsets.symmetric(horizontal: 10),
-                    decoration: BoxDecoration(
-                        color: Colors.black.withOpacity(0.9),
-                        borderRadius: BorderRadius.circular(3)),
+                    decoration: BoxDecoration(color: Colors.black.withOpacity(0.9), borderRadius: BorderRadius.circular(3)),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
@@ -205,10 +197,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         const SizedBox(
                           width: 5,
                         ),
-                        Text("EDIT",
-                            style: TextStyle(
-                                color: Colors.white.withOpacity(0.9),
-                                fontFamily: 'RobotRegular')),
+                        Text("EDIT", style: TextStyle(color: Colors.white.withOpacity(0.9), fontFamily: 'RobotRegular')),
                       ],
                     ),
                   ),
@@ -220,9 +209,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               ),
               Text(
                 widget.product!.description!,
-                style: TextStyle(
-                    color: Colors.black.withOpacity(0.9),
-                    fontFamily: 'RobotRegular'),
+                style: TextStyle(color: Colors.black.withOpacity(0.9), fontFamily: 'RobotRegular'),
               ),
 
               //  Row(
@@ -292,10 +279,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   }
 
   void delete() {
-    AppWidgets.showConfirmationDialog(context, 'Delete Product',
-        (MediaQuery.of(context).size.height / 100.0) * 19,
-        actionLabelOne: APPStrings.NO,
-        actionLabelTwo: APPStrings.YES, onClickActionOne: () {
+    AppWidgets.showConfirmationDialog(context, 'Delete Product', (MediaQuery.of(context).size.height / 100.0) * 19,
+        actionLabelOne: APPStrings.NO, actionLabelTwo: APPStrings.YES, onClickActionOne: () {
       Navigator.of(context).pop();
     }, onClickActionTwo: () {
       Navigator.of(context).pop();
@@ -305,8 +290,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
 
   callDeleteProductApi() async {
     var connectivityResult = await (Connectivity().checkConnectivity());
-    if (connectivityResult == ConnectivityResult.mobile ||
-        connectivityResult == ConnectivityResult.wifi) {
+    if (connectivityResult == ConnectivityResult.mobile || connectivityResult == ConnectivityResult.wifi) {
       mHomeProvider!.deleteProduct(widget.product!.id.toString()).then((value) {
         if (value != null) {
           try {

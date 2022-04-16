@@ -49,7 +49,7 @@ class _SellerOtpVerifyScreenState extends State<SellerOtpVerifyScreen> {
     const oneSec = Duration(seconds: 1);
     _timer = Timer.periodic(
       oneSec,
-          (Timer timer) {
+      (Timer timer) {
         if (_start == 0) {
           setState(() {
             timer.cancel();
@@ -85,23 +85,28 @@ class _SellerOtpVerifyScreenState extends State<SellerOtpVerifyScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('VERIFY DETAILS', style: AppFont.NUNITO_SEMI_BOLD_BLACK_24,),
+                Text(
+                  'VERIFY DETAILS',
+                  style: AppFont.NUNITO_SEMI_BOLD_BLACK_24,
+                ),
                 const SizedBox(height: 24),
-                Text("Verify Your Mobile Number for\nVerify Details", style: AppFont.NUNITO_REGULAR_DARK_CHARCOAl_BLACK_16,
-                textAlign: TextAlign.center,),
+                Text(
+                  "Verify Your Mobile Number for\nVerify Details",
+                  style: AppFont.NUNITO_REGULAR_DARK_CHARCOAl_BLACK_16,
+                  textAlign: TextAlign.center,
+                ),
                 const SizedBox(height: 16),
                 Form(
                   key: formKey,
                   child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 8.0, horizontal: 32),
+                      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 32),
                       child: PinCodeTextField(
                         appContext: context,
                         textStyle: const TextStyle(
                           color: AppColors.colorLightBrown,
                         ),
                         showCursor: false,
-                        length: 4,
+                        length: 6,
                         blinkWhenObscuring: true,
                         hintCharacter: "0",
                         hintStyle: AppFont.ROBOT_REGULAR_BLACK_14,
@@ -124,9 +129,7 @@ class _SellerOtpVerifyScreenState extends State<SellerOtpVerifyScreen> {
                         errorAnimationController: errorController,
                         controller: _otpController,
                         keyboardType: TextInputType.number,
-                        inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly
-                        ],
+                        inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                         boxShadows: const [
                           BoxShadow(
                             color: Colors.black12,
@@ -152,13 +155,9 @@ class _SellerOtpVerifyScreenState extends State<SellerOtpVerifyScreen> {
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(_timerStart,
-                        style: AppFont.NUNITO_REGULAR_BLACK_18)
-                  ],
+                  children: [Text(_timerStart, style: AppFont.NUNITO_REGULAR_BLACK_18)],
                 ),
-                Text('(OTP Waiting Time)',
-                    style: AppFont.NUNITO_REGULAR_BLACK_14),
+                Text('(OTP Waiting Time)', style: AppFont.NUNITO_REGULAR_BLACK_14),
                 const SizedBox(height: 40),
                 GestureDetector(
                   child: Material(
@@ -168,16 +167,13 @@ class _SellerOtpVerifyScreenState extends State<SellerOtpVerifyScreen> {
                     child: Container(
                       alignment: Alignment.center,
                       height: 40,
-                      child: MaterialButton(
-                          onPressed: null,
-                          child: Text('VERIFY NOW',
-                              style: AppFont.NUNITO_BOLD_WHITE_24)),
+                      child: MaterialButton(onPressed: null, child: Text('VERIFY NOW', style: AppFont.NUNITO_BOLD_WHITE_24)),
                     ),
                   ),
                   onTap: () {
                     if (smsOTP == null || smsOTP!.length < 4) {
                       Fluttertoast.showToast(msg: 'Please enter otp');
-                    } else if(_otpController.text.toString().trim().length < 4) {
+                    } else if (_otpController.text.toString().trim().length < 4) {
                       Fluttertoast.showToast(msg: 'Please enter valid otp');
                     } else {
                       callVerifyOtp();
@@ -214,19 +210,19 @@ class _SellerOtpVerifyScreenState extends State<SellerOtpVerifyScreen> {
                         style: TextStyle(
                           decoration: TextDecoration.underline,
                           fontFamily: 'NunitoSemiBold',
-                          color: isResend
-                              ? AppColors.colorBrown
-                              : AppColors.colorLightBrown,
+                          color: isResend ? AppColors.colorBrown : AppColors.colorLightBrown,
                         ),
                       ),
                     )
                   ],
                 ),
                 const SizedBox(height: 32),
-                Image.asset(
-                  APPImages.IC_SPLASH_LOGO,
-                  width: 163,
-                  height: 163,
+                Flexible(
+                  child: Image.asset(
+                    APPImages.IC_SPLASH_LOGO,
+                    width: 163,
+                    height: 163,
+                  ),
                 ),
                 const SizedBox(height: 32),
               ],
@@ -254,12 +250,15 @@ class _SellerOtpVerifyScreenState extends State<SellerOtpVerifyScreen> {
             } else {
               CommonModel commonModel = CommonModel.fromJson(value);
               Fluttertoast.showToast(msg: commonModel.message!);
-              if(widget.isFromSeller!){
-                NavKey.navKey.currentState!.pushAndRemoveUntil(MaterialPageRoute(builder: (_) => const SelectPlanScreen()),
-                        (route) => false);
-              }else{
-                NavKey.navKey.currentState!.pushAndRemoveUntil(MaterialPageRoute(builder: (_) => BuyerHomeScreenNavigation(selectedIndex: 0,)),
-                        (route) => false);
+              if (widget.isFromSeller!) {
+                NavKey.navKey.currentState!.pushAndRemoveUntil(MaterialPageRoute(builder: (_) => const SelectPlanScreen()), (route) => false);
+              } else {
+                NavKey.navKey.currentState!.pushAndRemoveUntil(
+                    MaterialPageRoute(
+                        builder: (_) => BuyerHomeScreenNavigation(
+                              selectedIndex: 0,
+                            )),
+                    (route) => false);
               }
             }
           } catch (ex) {
