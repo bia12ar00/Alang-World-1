@@ -85,41 +85,56 @@ class _MyPlanScreenState extends State<MyPlanScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const SizedBox(height: 24),
-                            Align(
+                            const Align(
                               child: Text(
                                 'My Plan',
-                                style:
-                                    AppFont.NUNITO_SEMI_BOLD_BLACK_24,
+                                style: TextStyle(fontSize: 25,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black,
+                                    fontFamily: 'RobotRegular'),
                               ),
                               alignment: Alignment.center,
                             ),
-                            const SizedBox(height: 32),
-                            Text(
+                             Text(
                               'Company Name',
-                              style: AppFont.NUNITO_SEMI_BOLD_BLACK_16,
+                              style: TextStyle(fontSize: 15,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.black.withOpacity(1.0),
+                                  fontFamily: 'RobotRegular'),
                             ),
                             const Divider(
                               thickness: 2,
                               endIndent: 180,
+                              color: Colors.black,
                             ),
                             Text(
                               myPlanModel.results!.plan!.planName!,
-                              style: AppFont.NUNITO_BOLD_BLACK_16,
+                              style:const TextStyle(fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          fontFamily: 'RobotRegular'),
                             ),
-                            const SizedBox(height: 32),
+                            const SizedBox(height: 15,),
                             Text(
                               'Current Plan',
-                              style: AppFont.NUNITO_SEMI_BOLD_BLACK_16,
+                              style: TextStyle(fontSize: 15,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.black.withOpacity(1.0),
+                                  fontFamily: 'RobotRegular'),
                             ),
                             const Divider(
                               thickness: 2,
                               endIndent: 200,
+                                color: Colors.black
                             ),
                             Text(
                               myPlanModel.results!.plan!.planName!,
-                              style: AppFont.NUNITO_BOLD_BLACK_16,
+                              style:const TextStyle(fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                  fontFamily: 'RobotRegular'),
                             ),
-                            const SizedBox(height: 32),
+                            const SizedBox(height: 15,),
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -130,17 +145,23 @@ class _MyPlanScreenState extends State<MyPlanScreen> {
                                     children: [
                                       Text(
                                         'Product Upload Limit',
-                                        style:
-                                            AppFont.NUNITO_SEMI_BOLD_BLACK_16,
+                                        style: TextStyle(fontSize: 15,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.black.withOpacity(1.0),
+                                      fontFamily: 'RobotRegular'),
                                       ),
                                       const Divider(
                                         thickness: 2,
                                         endIndent: 50,
+                                          color: Colors.black
                                       ),
                                       Text(
                                         myPlanModel.results!.plan!
                                             .noOfAllowedProducts!,
-                                        style: AppFont.NUNITO_BOLD_BLACK_16,
+                                        style:const TextStyle(fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.black,
+                                            fontFamily: 'RobotRegular'),
                                       ),
                                     ],
                                   ),
@@ -152,23 +173,29 @@ class _MyPlanScreenState extends State<MyPlanScreen> {
                                     children: [
                                       Text(
                                         'Validity',
-                                        style:
-                                            AppFont.NUNITO_SEMI_BOLD_BLACK_16,
+                                        style: TextStyle(fontSize: 15,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.black.withOpacity(1.0),
+                                      fontFamily: 'RobotRegular'),
                                       ),
                                       const Divider(
                                         thickness: 2,
+                                          color: Colors.black
                                       ),
                                       Text(
                                         myPlanModel.results!.plan!.validity! +
                                             ' days',
-                                        style: AppFont.NUNITO_BOLD_BLACK_16,
+                                        style:const TextStyle(fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.black,
+                                            fontFamily: 'RobotRegular'),
                                       ),
                                     ],
                                   ),
                                 )
                               ],
                             ),
-                            const SizedBox(height: 32),
+                            const SizedBox(height: 15,),
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -179,17 +206,23 @@ class _MyPlanScreenState extends State<MyPlanScreen> {
                                     children: [
                                       Text(
                                         'Plan Start Date',
-                                        style:
-                                            AppFont.NUNITO_SEMI_BOLD_BLACK_16,
+                                        style: TextStyle(fontSize: 15,
+                                            fontWeight: FontWeight.w500,
+                                            color: Colors.black.withOpacity(1.0),
+                                            fontFamily: 'RobotRegular'),
                                       ),
                                       const Divider(
                                         thickness: 2,
                                         endIndent: 40,
+                                          color: Colors.black
                                       ),
                                       Text(
                                         myPlanModel.results!.planPurchase!
                                             .planPurchaseDate!,
-                                        style: AppFont.NUNITO_BOLD_BLACK_16,
+                                        style:const TextStyle(fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.black,
+                                            fontFamily: 'RobotRegular'),
                                       ),
                                     ],
                                   ),
@@ -201,44 +234,49 @@ class _MyPlanScreenState extends State<MyPlanScreen> {
                                     children: [
                                       Text(
                                         'Expire On',
-                                        style:
-                                            AppFont.NUNITO_SEMI_BOLD_BLACK_16,
+                                        style: TextStyle(fontSize: 15,
+                                            fontWeight: FontWeight.w500,
+                                            color: Colors.black.withOpacity(1.0),
+                                            fontFamily: 'RobotRegular'),
                                       ),
                                       const Divider(
                                         thickness: 2,
                                         endIndent: 40,
+                                          color: Colors.black
                                       ),
                                       Text(
                                         myPlanModel.results!.planPurchase!
                                             .planExpiryDate!,
-                                        style: AppFont.NUNITO_BOLD_BLACK_16,
+                                        style:const TextStyle(fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.black,
+                                            fontFamily: 'RobotRegular'),
                                       ),
                                     ],
                                   ),
                                 )
                               ],
                             ),
-                            const SizedBox(height: 32),
-                            Align(
-                              alignment: Alignment.center,
-                              child: GestureDetector(
-                                child: Material(
-                                  elevation: 0.0,
-                                  borderRadius: BorderRadius.circular(8),
-                                  color: AppColors.colorOrange,
-                                  child: Container(
-                                    alignment: Alignment.center,
-                                    height: 40,
-                                    child: MaterialButton(
-                                        onPressed: null,
-                                        child: Text('UPGRADE PLAN',
-                                            style: AppFont
-                                                .NUNITO_REGULAR_WHITE_16)),
-                                  ),
-                                ),
-                                onTap: () {},
-                              ),
-                            ),
+                            // Align(
+                            //   alignment: Alignment.center,
+                            //   child: GestureDetector(
+                            //     child: Material(
+                            //       elevation: 0.0,
+                            //       borderRadius: BorderRadius.circular(8),
+                            //       color: AppColors.colorOrange,
+                            //       child: Container(
+                            //         alignment: Alignment.center,
+                            //         height: 40,
+                            //         child: MaterialButton(
+                            //             onPressed: null,
+                            //             child: Text('UPGRADE PLAN',
+                            //                 style: AppFont
+                            //                     .NUNITO_REGULAR_WHITE_16)),
+                            //       ),
+                            //     ),
+                            //     onTap: () {},
+                            //   ),
+                            // ),
                             const SizedBox(height: 32),
                           ],
                         ),

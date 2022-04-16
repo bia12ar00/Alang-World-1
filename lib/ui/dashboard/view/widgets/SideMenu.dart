@@ -29,6 +29,9 @@ class _SideMenuState extends State<SideMenu> {
             width: 123, height: 123,),
           const SizedBox(height: 64,),
           ListTile(
+            style: ListTileStyle.drawer,
+            dense: true,
+            visualDensity: VisualDensity.compact,
             title: const Text('My Product'),
             onTap: () {
               Navigator.pop(context);
@@ -42,6 +45,9 @@ class _SideMenuState extends State<SideMenu> {
             },
           ),
           ListTile(
+            style: ListTileStyle.drawer,
+            dense: true,
+            visualDensity: VisualDensity.compact,
             title: const Text('Add Product'),
             onTap: () {
               Navigator.pop(context);
@@ -55,6 +61,9 @@ class _SideMenuState extends State<SideMenu> {
             },
           ),
           ListTile(
+            style: ListTileStyle.drawer,
+            dense: true,
+            visualDensity: VisualDensity.compact,
             title: const Text('My Plan'),
             onTap: () {
               Navigator.pop(context);
@@ -63,6 +72,9 @@ class _SideMenuState extends State<SideMenu> {
             },
           ),
           ListTile(
+            style: ListTileStyle.drawer,
+            dense: true,
+            visualDensity: VisualDensity.compact,
             title: const Text('My Profile'),
             onTap: () {
               Navigator.pop(context);
@@ -76,6 +88,9 @@ class _SideMenuState extends State<SideMenu> {
             },
           ),
           ListTile(
+            style: ListTileStyle.drawer,
+            dense: true,
+            visualDensity: VisualDensity.compact,
             title: const Text('Alang World'),
             onTap: () {
               Navigator.pop(context);
@@ -84,6 +99,9 @@ class _SideMenuState extends State<SideMenu> {
             },
           ),
           ListTile(
+            style: ListTileStyle.drawer,
+            dense: true,
+            visualDensity: VisualDensity.compact,
             title: const Text('Contact US'),
             onTap: () {
               Navigator.pop(context);
@@ -92,6 +110,9 @@ class _SideMenuState extends State<SideMenu> {
             },
           ),
           ListTile(
+            style: ListTileStyle.drawer,
+            dense: true,
+            visualDensity: VisualDensity.compact,
             title: const Text('Logout'),
             onTap: () {
               logout();
