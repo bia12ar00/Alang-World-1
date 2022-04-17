@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:connectivity/connectivity.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -9,6 +10,8 @@ import 'package:sb_portal/ui/auth/model/CommonModel.dart';
 import 'package:sb_portal/ui/dashboard/model/AddProductModel.dart';
 import 'package:sb_portal/ui/dashboard/model/ProductListModel.dart';
 import 'package:sb_portal/ui/dashboard/provider/HomeProvider.dart';
+import 'package:sb_portal/ui/dashboard/view/EditProductScreen.dart';
+import 'package:sb_portal/utils/NavKey.dart';
 import 'package:sb_portal/utils/app_colors.dart';
 import 'package:sb_portal/utils/app_images.dart';
 import 'package:sb_portal/utils/app_string.dart';
@@ -182,23 +185,34 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     widget.product!.categoryname!,
                     style: TextStyle(color: Colors.black.withOpacity(0.9), fontFamily: 'RobotRegular'),
                   ),
-                  Container(
-                    height: 25,
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    decoration: BoxDecoration(color: Colors.black.withOpacity(0.9), borderRadius: BorderRadius.circular(3)),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        const Icon(
-                          FontAwesomeIcons.penToSquare,
-                          color: Colors.white,
-                          size: 15,
-                        ),
-                        const SizedBox(
-                          width: 5,
-                        ),
-                        Text("EDIT", style: TextStyle(color: Colors.white.withOpacity(0.9), fontFamily: 'RobotRegular')),
-                      ],
+                  InkWell(
+                    onTap: () {
+                      //  EditProductScreen
+                      NavKey.navKey.currentState!.push(
+                        MaterialPageRoute(
+                            builder: (_) => EditProductScreen(
+                                  product: widget.product,
+                                )),
+                      );
+                    },
+                    child: Container(
+                      height: 25,
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      decoration: BoxDecoration(color: Colors.black.withOpacity(0.9), borderRadius: BorderRadius.circular(3)),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          const Icon(
+                            FontAwesomeIcons.penToSquare,
+                            color: Colors.white,
+                            size: 15,
+                          ),
+                          const SizedBox(
+                            width: 5,
+                          ),
+                          Text("EDIT", style: TextStyle(color: Colors.white.withOpacity(0.9), fontFamily: 'RobotRegular')),
+                        ],
+                      ),
                     ),
                   ),
                 ],
@@ -279,7 +293,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   }
 
   void delete() {
-    AppWidgets.showConfirmationDialog(context, 'Delete Product', (MediaQuery.of(context).size.height / 100.0) * 19,
+    AppWidgets.showConfirmationDialog(context, 'Delete Product', (MediaQuery.of(context).size.height / 80.0) * 19,
         actionLabelOne: APPStrings.NO, actionLabelTwo: APPStrings.YES, onClickActionOne: () {
       Navigator.of(context).pop();
     }, onClickActionTwo: () {
@@ -301,6 +315,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               AddProductModel addProductModel = AddProductModel.fromJson(value);
               Fluttertoast.showToast(msg: addProductModel.message!);
             }
+            Navigator.of(context).pop();
           } catch (ex) {
             print(ex);
             Fluttertoast.showToast(msg: APPStrings.INTERNAL_SERVER_ISSUE);

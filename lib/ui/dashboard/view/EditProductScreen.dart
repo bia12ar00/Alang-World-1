@@ -49,9 +49,9 @@ class _EditProductScreenState extends State<EditProductScreen> {
 
   @override
   void initState() {
-    prodNameController.text = widget.product!.productName!;
-    prodNameController.text = widget.product!.description!;
-    if(widget.product!.category != null) {
+    prodNameController.text = widget.product!.productName.toString();
+    descController.text = widget.product!.description.toString();
+    if (widget.product!.category != null) {
       categoryData = widget.product!.category!;
     }
     callProductCategoryListApi();
@@ -68,8 +68,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
             backgroundColor: AppColors.colorWhite,
             body: SingleChildScrollView(
               child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                 child: Column(
                   children: [
                     const SizedBox(height: 16),
@@ -77,7 +76,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                       children: [
                         InkWell(
                           onTap: () {
-                            Navigator.pop(context);
+                            NavKey.navKey.currentState!.pop();
                           },
                           child: const Icon(
                             Icons.arrow_back,
@@ -104,34 +103,29 @@ class _EditProductScreenState extends State<EditProductScreen> {
                     const SizedBox(height: 16),
                     productCategoryModel.results != null
                         ? DropdownButton<Category>(
-                          hint: categoryData == null
-                              ? const Text('Select Product Category')
-                              : Text(categoryData!.categoryName!),
-                          underline: Container(),
-                          isExpanded: true,
-                          items: productCategoryModel.results!.category!
-                              .map((Category value) {
-                            return DropdownMenuItem<Category>(
-                              value: value,
-                              child: Text(value.categoryName!),
-                            );
-                          }).toList(),
-                          onChanged: (newValue) {
-                            setState(() {
-                              categoryData = newValue;
-                            });
-                          },
-                        )
+                            hint: categoryData == null ? const Text('Select Product Category') : Text(categoryData!.categoryName!),
+                            underline: Container(),
+                            isExpanded: true,
+                            items: productCategoryModel.results!.category!.map((Category value) {
+                              return DropdownMenuItem<Category>(
+                                value: value,
+                                child: Text(value.categoryName!),
+                              );
+                            }).toList(),
+                            onChanged: (newValue) {
+                              setState(() {
+                                categoryData = newValue;
+                              });
+                            },
+                          )
                         : const SizedBox(),
-                    Container(width: double.maxFinite, height: 1, color: AppColors.colorGreyish,),
+                    Container(
+                      width: double.maxFinite,
+                      height: 1,
+                      color: AppColors.colorGreyish,
+                    ),
                     const SizedBox(height: 32),
-                    AppWidgets.buildCommentInputFields(
-                        descController,
-                        "Description",
-                        false,
-                        descFocus,
-                        null,
-                        context,
+                    AppWidgets.buildCommentInputFields(descController, "Description", false, descFocus, null, context,
                         textInputAction: TextInputAction.done),
                     const SizedBox(height: 32),
                     Row(
@@ -145,21 +139,20 @@ class _EditProductScreenState extends State<EditProductScreen> {
                           child: Container(
                             height: 100,
                             width: 120,
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 0, vertical: 0),
+                            padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
                             decoration: BoxDecoration(
                               color: AppColors.colorLightBlueGrey,
-                              border: Border.all(
-                                  color: AppColors.colorBorder, width: 1.0),
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(8)),
+                              border: Border.all(color: AppColors.colorBorder, width: 1.0),
+                              borderRadius: const BorderRadius.all(Radius.circular(8)),
                             ),
                             child: imageUrlOne == null
                                 ? widget.product!.image1 != null && widget.product!.image1!.isNotEmpty
-                                    ? Image.network(widget.product!.image1!, fit: BoxFit.fill,)
+                                    ? Image.network(
+                                        widget.product!.image1!,
+                                        fit: BoxFit.fill,
+                                      )
                                     : Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
+                                        mainAxisAlignment: MainAxisAlignment.center,
                                         children: const [
                                           Icon(
                                             Icons.add,
@@ -180,21 +173,20 @@ class _EditProductScreenState extends State<EditProductScreen> {
                           child: Container(
                             height: 100,
                             width: 120,
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 0, vertical: 0),
+                            padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
                             decoration: BoxDecoration(
                               color: AppColors.colorLightBlueGrey,
-                              border: Border.all(
-                                  color: AppColors.colorBorder, width: 1.0),
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(8)),
+                              border: Border.all(color: AppColors.colorBorder, width: 1.0),
+                              borderRadius: const BorderRadius.all(Radius.circular(8)),
                             ),
                             child: imageUrlTwo == null
                                 ? widget.product!.image2 != null && widget.product!.image2!.isNotEmpty
-                                    ? Image.network(widget.product!.image2!, fit: BoxFit.fill,)
+                                    ? Image.network(
+                                        widget.product!.image2!,
+                                        fit: BoxFit.fill,
+                                      )
                                     : Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
+                                        mainAxisAlignment: MainAxisAlignment.center,
                                         children: const [
                                           Icon(
                                             Icons.add,
@@ -221,21 +213,20 @@ class _EditProductScreenState extends State<EditProductScreen> {
                           child: Container(
                             height: 100,
                             width: 120,
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 0, vertical: 0),
+                            padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
                             decoration: BoxDecoration(
                               color: AppColors.colorLightBlueGrey,
-                              border: Border.all(
-                                  color: AppColors.colorBorder, width: 1.0),
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(8)),
+                              border: Border.all(color: AppColors.colorBorder, width: 1.0),
+                              borderRadius: const BorderRadius.all(Radius.circular(8)),
                             ),
                             child: imageUrlThree == null
                                 ? widget.product!.image3 != null && widget.product!.image3!.isNotEmpty
-                                    ? Image.network(widget.product!.image3!, fit: BoxFit.fill,)
+                                    ? Image.network(
+                                        widget.product!.image3!,
+                                        fit: BoxFit.fill,
+                                      )
                                     : Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
+                                        mainAxisAlignment: MainAxisAlignment.center,
                                         children: const [
                                           Icon(
                                             Icons.add,
@@ -256,21 +247,20 @@ class _EditProductScreenState extends State<EditProductScreen> {
                           child: Container(
                             height: 100,
                             width: 120,
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 0, vertical: 0),
+                            padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
                             decoration: BoxDecoration(
                               color: AppColors.colorLightBlueGrey,
-                              border: Border.all(
-                                  color: AppColors.colorBorder, width: 1.0),
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(8)),
+                              border: Border.all(color: AppColors.colorBorder, width: 1.0),
+                              borderRadius: const BorderRadius.all(Radius.circular(8)),
                             ),
                             child: imageUrlFour == null
                                 ? widget.product!.image4 != null && widget.product!.image4!.isNotEmpty
-                                    ? Image.network(widget.product!.image4!, fit: BoxFit.fill,)
+                                    ? Image.network(
+                                        widget.product!.image4!,
+                                        fit: BoxFit.fill,
+                                      )
                                     : Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
+                                        mainAxisAlignment: MainAxisAlignment.center,
                                         children: const [
                                           Icon(
                                             Icons.add,
@@ -297,21 +287,20 @@ class _EditProductScreenState extends State<EditProductScreen> {
                           child: Container(
                             height: 100,
                             width: 120,
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 0, vertical: 0),
+                            padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
                             decoration: BoxDecoration(
                               color: AppColors.colorLightBlueGrey,
-                              border: Border.all(
-                                  color: AppColors.colorBorder, width: 1.0),
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(8)),
+                              border: Border.all(color: AppColors.colorBorder, width: 1.0),
+                              borderRadius: const BorderRadius.all(Radius.circular(8)),
                             ),
                             child: imageUrlFive == null
                                 ? widget.product!.image5 != null && widget.product!.image5!.isNotEmpty
-                                    ? Image.network(widget.product!.image5!, fit: BoxFit.fill,)
+                                    ? Image.network(
+                                        widget.product!.image5!,
+                                        fit: BoxFit.fill,
+                                      )
                                     : Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
+                                        mainAxisAlignment: MainAxisAlignment.center,
                                         children: const [
                                           Icon(
                                             Icons.add,
@@ -332,21 +321,20 @@ class _EditProductScreenState extends State<EditProductScreen> {
                           child: Container(
                             height: 100,
                             width: 120,
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 0, vertical: 0),
+                            padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
                             decoration: BoxDecoration(
                               color: AppColors.colorLightBlueGrey,
-                              border: Border.all(
-                                  color: AppColors.colorBorder, width: 1.0),
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(8)),
+                              border: Border.all(color: AppColors.colorBorder, width: 1.0),
+                              borderRadius: const BorderRadius.all(Radius.circular(8)),
                             ),
                             child: imageUrlSix == null
                                 ? widget.product!.image6 != null && widget.product!.image6!.isNotEmpty
-                                    ? Image.network(widget.product!.image6!, fit: BoxFit.fill,)
+                                    ? Image.network(
+                                        widget.product!.image6!,
+                                        fit: BoxFit.fill,
+                                      )
                                     : Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
+                                        mainAxisAlignment: MainAxisAlignment.center,
                                         children: const [
                                           Icon(
                                             Icons.add,
@@ -370,10 +358,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                         child: Container(
                           alignment: Alignment.center,
                           height: 40,
-                          child: MaterialButton(
-                              onPressed: null,
-                              child: Text('EDIT',
-                                  style: AppFont.NUNITO_BOLD_WHITE_24)),
+                          child: MaterialButton(onPressed: null, child: Text('EDIT', style: AppFont.NUNITO_BOLD_WHITE_24)),
                         ),
                       ),
                       onTap: () {
@@ -484,10 +469,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
         child: Material(
           child: Container(
             decoration: BoxDecoration(
-                color: AppColors.colorWhite,
-                borderRadius: const BorderRadius.only(
-                    topRight: Radius.circular(8.0),
-                    topLeft: Radius.circular(8.0))),
+                color: AppColors.colorWhite, borderRadius: const BorderRadius.only(topRight: Radius.circular(8.0), topLeft: Radius.circular(8.0))),
             padding: const EdgeInsets.all(12),
             child: Row(
               children: <Widget>[
@@ -519,9 +501,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
           child: Container(
             decoration: BoxDecoration(
                 color: AppColors.colorWhite,
-                borderRadius: const BorderRadius.only(
-                    bottomLeft: Radius.circular(8.0),
-                    bottomRight: Radius.circular(8.0))),
+                borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(8.0), bottomRight: Radius.circular(8.0))),
             padding: const EdgeInsets.all(12),
             child: Row(
               children: <Widget>[
@@ -575,8 +555,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
 
   callProductCategoryListApi() async {
     var connectivityResult = await (Connectivity().checkConnectivity());
-    if (connectivityResult == ConnectivityResult.mobile ||
-        connectivityResult == ConnectivityResult.wifi) {
+    if (connectivityResult == ConnectivityResult.mobile || connectivityResult == ConnectivityResult.wifi) {
       mHomeProvider!.getProductCategory().then((value) {
         if (value != null) {
           try {
@@ -602,8 +581,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
   callEditProductApi() async {
     String sellerID = PreferenceHelper.getString(PreferenceHelper.SELLER_ID);
     var connectivityResult = await (Connectivity().checkConnectivity());
-    if (connectivityResult == ConnectivityResult.mobile ||
-        connectivityResult == ConnectivityResult.wifi) {
+    if (connectivityResult == ConnectivityResult.mobile || connectivityResult == ConnectivityResult.wifi) {
       Map<String, String> body = {
         APPStrings.paramSellerId: sellerID,
         APPStrings.paramProductName: prodNameController.text.toString(),
@@ -634,7 +612,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
             } else {
               AddProductModel addProductModel = AddProductModel.fromJson(value);
               Fluttertoast.showToast(msg: addProductModel.message!);
-              NavKey.navKey.currentState!.pop();
+              Navigator.of(context).pop();
             }
           } catch (ex) {
             print(ex);

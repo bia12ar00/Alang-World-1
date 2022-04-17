@@ -128,7 +128,7 @@ class _SideMenuState extends State<SideMenu> {
   }
 
   void logout() {
-    AppWidgets.showConfirmationDialog(context, 'Logout', (MediaQuery.of(context).size.height / 100.0) * 19,
+    AppWidgets.showConfirmationDialog(context, 'Logout', (MediaQuery.of(context).size.height / 80.0) * 19,
         actionLabelOne: APPStrings.NO, actionLabelTwo: APPStrings.YES, onClickActionOne: () {
       Navigator.of(context).pop();
     }, onClickActionTwo: () {

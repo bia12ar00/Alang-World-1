@@ -12,7 +12,6 @@ class HomeProvider extends ChangeNotifier {
     mContext = context;
   }
 
-
   Future<Map<String, dynamic>> productList(String sellerId) {
     isRequestSend = true;
     notifyListeners();
@@ -91,7 +90,7 @@ class HomeProvider extends ChangeNotifier {
   Future<Map<String, dynamic>> deleteProduct(String id) {
     isRequestSend = true;
     notifyListeners();
-    return api.callGetMethodToken(mContext!, APPStrings.apiDeleteProduct + '/' + id).then((value) {
+    return api.callPostMethodWithToken(mContext!, APPStrings.apiDeleteProduct + '/' + id, {}).then((value) {
       isRequestSend = false;
       notifyListeners();
       Map<String, dynamic> data = jsonDecode(value);
@@ -177,5 +176,4 @@ class HomeProvider extends ChangeNotifier {
       throw e;
     });
   }
-
 }
