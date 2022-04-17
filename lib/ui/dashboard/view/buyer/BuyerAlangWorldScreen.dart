@@ -6,6 +6,8 @@ import 'package:sb_portal/utils/app_colors.dart';
 import 'package:sb_portal/utils/app_font.dart';
 import 'package:sb_portal/utils/app_images.dart';
 
+import '../widgets/about_us_body.dart';
+
 class BuyerAlangWorldScreen extends StatefulWidget {
   const BuyerAlangWorldScreen({Key? key}) : super(key: key);
 
@@ -44,18 +46,7 @@ class _BuyerAlangWorldScreenState extends State<BuyerAlangWorldScreen> {
             backgroundColor: AppColors.colorWhite,
             elevation: 0.0),
         backgroundColor: AppColors.colorWhite,
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('About Alang World', style: AppFont.NUNITO_SEMI_BOLD_BLACK_20,),
-              const Divider(thickness: 2, endIndent: 20,),
-              const SizedBox(height: 16),
-              const Text('Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry   standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum')
-            ],
-          ),
-        ),
+        body: AboutUsBody(),
         bottomNavigationBar: BottomNavigationBar(
           onTap: (_position) {
             NavKey.navKey.currentState!.pushAndRemoveUntil(MaterialPageRoute(builder: (_) =>

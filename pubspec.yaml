@@ -73,6 +73,9 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   fonts:
+    - family: InterMedium
+      fonts:
+        - asset: fonts/static/Inter-Medium.ttf
     - family: NunitoRegular
       fonts:
         - asset: fonts/nunito_regular.ttf

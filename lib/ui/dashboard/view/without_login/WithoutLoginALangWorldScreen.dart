@@ -1,5 +1,8 @@
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:sb_portal/ui/auth/view/SellerLogin.dart';
+import 'package:sb_portal/ui/dashboard/view/widgets/about_us_body.dart';
 import 'package:sb_portal/ui/dashboard/view/without_login/widget/WithOutLoginSidemenu.dart';
 import 'package:sb_portal/utils/app_colors.dart';
 import 'package:sb_portal/utils/app_font.dart';
@@ -45,72 +48,72 @@ class _WithoutLoginALangWorldScreenState extends State<WithoutLoginALangWorldScr
         backgroundColor: AppColors.colorWhite,
         body: Column(
           children: [
+            Expanded(child: AboutUsBody()),
+            Row(
+          children: [
             Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('About Alang World', style: AppFont.NUNITO_SEMI_BOLD_BLACK_20,),
-                    const Divider(thickness: 2, endIndent: 20,),
-                    const SizedBox(height: 16),
-                    const Text('Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry   standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum')
-                  ],
+              child: InkWell(
+                child: Container(
+                  child: Column(
+                    children: [
+                      Text(
+                        'SIGN UP/SIGN IN',
+                        style: AppFont.NUNITO_REGULAR_WHITE_12,
+                      ),
+                      Text(
+                        'SELLER',
+                        style: AppFont.NUNITO_BOLD_WHITE_18,
+                      ),
+                    ],
+                  ),
+                  padding: const EdgeInsets.symmetric(vertical: 2),
+                  color: AppColors.colorOrange,
+                ),
+                onTap: () {
+                  Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                          builder: (_) => const SellerLogin(
+                                isFromSeller: true,
+                              )),
+                      (route) => false);
+                },
+              ),
+            ),
+            Expanded(
+              child: InkWell(
+                onTap: () {
+                  Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                          builder: (_) => const SellerLogin(
+                                isFromSeller: false,
+                              )),
+                      (route) => false);
+                },
+                child: Container(
+                  child: Column(
+                    children: [
+                      Text(
+                        'SIGN UP/SIGN IN',
+                        style: AppFont.NUNITO_REGULAR_WHITE_12,
+                      ),
+                      Text(
+                        'BUYER',
+                        style: AppFont.NUNITO_BOLD_WHITE_18,
+                      ),
+                    ],
+                  ),
+                  padding: const EdgeInsets.symmetric(vertical: 2),
+                  color: AppColors.colorSKyBlue,
                 ),
               ),
             ),
-            Row(
-              children: [
-                Expanded(
-                  child: InkWell(
-                    child: Container(
-                      child: Column(
-                        children: [
-                          Text('SIGN UP/SIGN IN', style: AppFont.NUNITO_REGULAR_WHITE_12,),
-                          Text('SELLER', style: AppFont.NUNITO_BOLD_WHITE_18,),
-                        ],
-                      ),
-                      padding: const EdgeInsets.symmetric(vertical: 2),
-                      color: AppColors.colorOrange,
-                    ),
-                    onTap: () {
-                      Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(
-                              builder: (_) => const SellerLogin(
-                                isFromSeller: true,
-                              )),
-                              (route) => false);
-                    },
-                  ),
-                ),
-                Expanded(
-                  child: InkWell(
-                    onTap: () {
-                      Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(
-                              builder: (_) => const SellerLogin(
-                                isFromSeller: false,
-                              )),
-                              (route) => false);
-                    },
-                    child: Container(
-                      child: Column(
-                        children: [
-                          Text('SIGN UP/SIGN IN',style: AppFont.NUNITO_REGULAR_WHITE_12,),
-                          Text('BUYER', style: AppFont.NUNITO_BOLD_WHITE_18,),
-                        ],
-                      ),
-                      padding: const EdgeInsets.symmetric(vertical: 2),
-                      color: AppColors.colorSKyBlue,
-                    ),
-                  ),
-                ),
-              ],
-            ),
           ],
         ),
+          ],
+        ),
+        
       ),
     );
   }
