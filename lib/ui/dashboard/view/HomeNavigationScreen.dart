@@ -50,7 +50,12 @@ class _HomeScreenNavigationState extends State<HomeScreenNavigation> {
                         Scaffold.of(context).openDrawer();
                       },
                     ),
-                    Expanded(child: Image.asset(APPImages.IC_SPLASH_LOGO, height: 73, width: 73,)),
+                    Expanded(
+                        child: Image.asset(
+                      APPImages.IC_SPLASH_LOGO,
+                      height: 73,
+                      width: 73,
+                    )),
                     IconButton(
                       color: Colors.black,
                       icon: const Icon(Icons.notifications),
@@ -78,20 +83,28 @@ class _HomeScreenNavigationState extends State<HomeScreenNavigation> {
             showUnselectedLabels: false,
             items: const <BottomNavigationBarItem>[
               BottomNavigationBarItem(
-                icon: Icon(Icons.home, size: 32,),
+                icon: Icon(
+                  Icons.home,
+                  size: 32,
+                ),
                 label: '',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.add_circle_outline,  size: 32,),
+                icon: Icon(
+                  Icons.add_circle_outline,
+                  size: 32,
+                ),
                 label: '',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.account_circle,  size: 32,),
+                icon: Icon(
+                  Icons.account_circle,
+                  size: 32,
+                ),
                 label: '',
               ),
             ],
           ),
-
         ),
       ),
     );
@@ -107,13 +120,9 @@ class _HomeScreenNavigationState extends State<HomeScreenNavigation> {
     }
   }
 
-  _onWillPop()  {
-    DialogSingleClick.showCustomDialog(context,
-        title: 'Do you want to exit an app',
-        okBtnText: 'OK',
-        cancelBtnText: 'Cancel',
-        okBtnFunction: () {
-          SystemChannels.platform.invokeMethod('SystemNavigator.pop');
-        });
+  _onWillPop() {
+    DialogSingleClick.showCustomDialog(context, title: 'Do you want to exit an app', okBtnText: 'OK', cancelBtnText: 'Cancel', okBtnFunction: () {
+      SystemChannels.platform.invokeMethod('SystemNavigator.pop');
+    });
   }
 }

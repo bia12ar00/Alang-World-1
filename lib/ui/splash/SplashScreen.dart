@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:sb_portal/ui/auth/view/LandingScreen.dart';
 import 'package:sb_portal/ui/dashboard/view/HomeNavigationScreen.dart';
 import 'package:sb_portal/ui/dashboard/view/buyer/BuyerHomeScreenNavigation.dart';
 import 'package:sb_portal/ui/dashboard/view/without_login/WithoutLoginNavigation.dart';
@@ -26,18 +25,28 @@ class _SplashScreenState extends State<SplashScreen> {
   void moveTo() async {
     Future.delayed(const Duration(milliseconds: 1500), () {
       if (PreferenceHelper.getBool(PreferenceHelper.IS_SIGN_IN)) {
-        if(PreferenceHelper.getBool(PreferenceHelper.IS_SELLER_SIGN_IN)){
-          NavKey.navKey.currentState!.pushAndRemoveUntil(MaterialPageRoute(builder: (_) => HomeScreenNavigation(
-            selectedIndex: 0,
-          )), (route) => false);
-        } else{
-          NavKey.navKey.currentState!.pushAndRemoveUntil(MaterialPageRoute(builder: (_) => BuyerHomeScreenNavigation(
-            selectedIndex: 0,
-          )), (route) => false);
+        if (PreferenceHelper.getBool(PreferenceHelper.IS_SELLER_SIGN_IN)) {
+          NavKey.navKey.currentState!.pushAndRemoveUntil(
+              MaterialPageRoute(
+                  builder: (_) => HomeScreenNavigation(
+                        selectedIndex: 0,
+                      )),
+              (route) => false);
+        } else {
+          NavKey.navKey.currentState!.pushAndRemoveUntil(
+              MaterialPageRoute(
+                  builder: (_) => BuyerHomeScreenNavigation(
+                        selectedIndex: 0,
+                      )),
+              (route) => false);
         }
       } else {
-        NavKey.navKey.currentState!.pushAndRemoveUntil(MaterialPageRoute(builder: (_) =>
-        WithOutLoginNavigation(selectedIndex: 0,)), (route) => false);
+        NavKey.navKey.currentState!.pushAndRemoveUntil(
+            MaterialPageRoute(
+                builder: (_) => WithOutLoginNavigation(
+                      selectedIndex: 0,
+                    )),
+            (route) => false);
       }
     });
   }

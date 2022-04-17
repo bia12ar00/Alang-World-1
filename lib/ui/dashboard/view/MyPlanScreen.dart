@@ -53,7 +53,12 @@ class _MyPlanScreenState extends State<MyPlanScreen> {
                         Scaffold.of(context).openDrawer();
                       },
                     ),
-                    Expanded(child: Image.asset(APPImages.IC_SPLASH_LOGO, height: 73, width: 73,)),
+                    Expanded(
+                        child: Image.asset(
+                      APPImages.IC_SPLASH_LOGO,
+                      height: 73,
+                      width: 73,
+                    )),
                     IconButton(
                       color: Colors.black,
                       icon: const Icon(Icons.notifications),
@@ -72,14 +77,11 @@ class _MyPlanScreenState extends State<MyPlanScreen> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 24),
                       child: Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 24, vertical: 8),
+                        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
                         decoration: BoxDecoration(
                           color: AppColors.colorLightBlueGrey,
-                          border: Border.all(
-                              color: AppColors.colorBorder, width: 1.0),
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(8)),
+                          border: Border.all(color: AppColors.colorBorder, width: 1.0),
+                          borderRadius: const BorderRadius.all(Radius.circular(8)),
                         ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -88,19 +90,14 @@ class _MyPlanScreenState extends State<MyPlanScreen> {
                             const Align(
                               child: Text(
                                 'My Plan',
-                                style: TextStyle(fontSize: 25,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black,
-                                    fontFamily: 'RobotRegular'),
+                                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold, color: Colors.black, fontFamily: 'RobotRegular'),
                               ),
                               alignment: Alignment.center,
                             ),
-                             Text(
+                            Text(
                               'Company Name',
-                              style: TextStyle(fontSize: 15,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.black.withOpacity(1.0),
-                                  fontFamily: 'RobotRegular'),
+                              style: TextStyle(
+                                  fontSize: 15, fontWeight: FontWeight.w500, color: Colors.black.withOpacity(1.0), fontFamily: 'RobotRegular'),
                             ),
                             const Divider(
                               thickness: 2,
@@ -109,148 +106,115 @@ class _MyPlanScreenState extends State<MyPlanScreen> {
                             ),
                             Text(
                               myPlanModel.results!.plan!.planName!,
-                              style:const TextStyle(fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                          fontFamily: 'RobotRegular'),
+                              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black, fontFamily: 'RobotRegular'),
                             ),
-                            const SizedBox(height: 15,),
+                            const SizedBox(
+                              height: 15,
+                            ),
                             Text(
                               'Current Plan',
-                              style: TextStyle(fontSize: 15,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.black.withOpacity(1.0),
-                                  fontFamily: 'RobotRegular'),
+                              style: TextStyle(
+                                  fontSize: 15, fontWeight: FontWeight.w500, color: Colors.black.withOpacity(1.0), fontFamily: 'RobotRegular'),
                             ),
-                            const Divider(
-                              thickness: 2,
-                              endIndent: 200,
-                                color: Colors.black
-                            ),
+                            const Divider(thickness: 2, endIndent: 200, color: Colors.black),
                             Text(
                               myPlanModel.results!.plan!.planName!,
-                              style:const TextStyle(fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black,
-                                  fontFamily: 'RobotRegular'),
+                              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black, fontFamily: 'RobotRegular'),
                             ),
-                            const SizedBox(height: 15,),
+                            const SizedBox(
+                              height: 15,
+                            ),
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Expanded(
                                   child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         'Product Upload Limit',
-                                        style: TextStyle(fontSize: 15,
-                                      fontWeight: FontWeight.w500,
-                                      color: Colors.black.withOpacity(1.0),
-                                      fontFamily: 'RobotRegular'),
-                                      ),
-                                      const Divider(
-                                        thickness: 2,
-                                        endIndent: 50,
-                                          color: Colors.black
-                                      ),
-                                      Text(
-                                        myPlanModel.results!.plan!
-                                            .noOfAllowedProducts!,
-                                        style:const TextStyle(fontSize: 20,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.black,
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w500,
+                                            color: Colors.black.withOpacity(1.0),
                                             fontFamily: 'RobotRegular'),
+                                      ),
+                                      const Divider(thickness: 2, endIndent: 50, color: Colors.black),
+                                      Text(
+                                        myPlanModel.results!.plan!.noOfAllowedProducts!,
+                                        style: const TextStyle(
+                                            fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black, fontFamily: 'RobotRegular'),
                                       ),
                                     ],
                                   ),
                                 ),
                                 Expanded(
                                   child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         'Validity',
-                                        style: TextStyle(fontSize: 15,
-                                      fontWeight: FontWeight.w500,
-                                      color: Colors.black.withOpacity(1.0),
-                                      fontFamily: 'RobotRegular'),
-                                      ),
-                                      const Divider(
-                                        thickness: 2,
-                                          color: Colors.black
-                                      ),
-                                      Text(
-                                        myPlanModel.results!.plan!.validity! +
-                                            ' days',
-                                        style:const TextStyle(fontSize: 20,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.black,
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w500,
+                                            color: Colors.black.withOpacity(1.0),
                                             fontFamily: 'RobotRegular'),
+                                      ),
+                                      const Divider(thickness: 2, color: Colors.black),
+                                      Text(
+                                        myPlanModel.results!.plan!.validity! + ' days',
+                                        style: const TextStyle(
+                                            fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black, fontFamily: 'RobotRegular'),
                                       ),
                                     ],
                                   ),
                                 )
                               ],
                             ),
-                            const SizedBox(height: 15,),
+                            const SizedBox(
+                              height: 15,
+                            ),
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Expanded(
                                   child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         'Plan Start Date',
-                                        style: TextStyle(fontSize: 15,
+                                        style: TextStyle(
+                                            fontSize: 15,
                                             fontWeight: FontWeight.w500,
                                             color: Colors.black.withOpacity(1.0),
                                             fontFamily: 'RobotRegular'),
                                       ),
-                                      const Divider(
-                                        thickness: 2,
-                                        endIndent: 40,
-                                          color: Colors.black
-                                      ),
+                                      const Divider(thickness: 2, endIndent: 40, color: Colors.black),
                                       Text(
-                                        myPlanModel.results!.planPurchase!
-                                            .planPurchaseDate!,
-                                        style:const TextStyle(fontSize: 20,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.black,
-                                            fontFamily: 'RobotRegular'),
+                                        myPlanModel.results!.planPurchase!.planPurchaseDate!,
+                                        style: const TextStyle(
+                                            fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black, fontFamily: 'RobotRegular'),
                                       ),
                                     ],
                                   ),
                                 ),
                                 Expanded(
                                   child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         'Expire On',
-                                        style: TextStyle(fontSize: 15,
+                                        style: TextStyle(
+                                            fontSize: 15,
                                             fontWeight: FontWeight.w500,
                                             color: Colors.black.withOpacity(1.0),
                                             fontFamily: 'RobotRegular'),
                                       ),
-                                      const Divider(
-                                        thickness: 2,
-                                        endIndent: 40,
-                                          color: Colors.black
-                                      ),
+                                      const Divider(thickness: 2, endIndent: 40, color: Colors.black),
                                       Text(
-                                        myPlanModel.results!.planPurchase!
-                                            .planExpiryDate!,
-                                        style:const TextStyle(fontSize: 20,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.black,
-                                            fontFamily: 'RobotRegular'),
+                                        myPlanModel.results!.planPurchase!.planExpiryDate!,
+                                        style: const TextStyle(
+                                            fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black, fontFamily: 'RobotRegular'),
                                       ),
                                     ],
                                   ),
@@ -287,8 +251,12 @@ class _MyPlanScreenState extends State<MyPlanScreen> {
               : const SizedBox(),
           bottomNavigationBar: BottomNavigationBar(
             onTap: (_position) {
-              NavKey.navKey.currentState!.pushAndRemoveUntil(MaterialPageRoute(builder: (_) =>
-              HomeScreenNavigation(selectedIndex: _position,)), (route) => false);
+              NavKey.navKey.currentState!.pushAndRemoveUntil(
+                  MaterialPageRoute(
+                      builder: (_) => HomeScreenNavigation(
+                            selectedIndex: _position,
+                          )),
+                  (route) => false);
             },
             showSelectedLabels: false,
             selectedItemColor: AppColors.colorWhite,
@@ -299,15 +267,24 @@ class _MyPlanScreenState extends State<MyPlanScreen> {
             showUnselectedLabels: false,
             items: const <BottomNavigationBarItem>[
               BottomNavigationBarItem(
-                icon: Icon(Icons.home, size: 32,),
+                icon: Icon(
+                  Icons.home,
+                  size: 32,
+                ),
                 label: '',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.add_circle_outline,  size: 32,),
+                icon: Icon(
+                  Icons.add_circle_outline,
+                  size: 32,
+                ),
                 label: '',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.account_circle,  size: 32,),
+                icon: Icon(
+                  Icons.account_circle,
+                  size: 32,
+                ),
                 label: '',
               ),
             ],
@@ -319,8 +296,7 @@ class _MyPlanScreenState extends State<MyPlanScreen> {
 
   callMyPlan() async {
     var connectivityResult = await (Connectivity().checkConnectivity());
-    if (connectivityResult == ConnectivityResult.mobile ||
-        connectivityResult == ConnectivityResult.wifi) {
+    if (connectivityResult == ConnectivityResult.mobile || connectivityResult == ConnectivityResult.wifi) {
       mHomeProvider!.getUserPlan().then((value) {
         if (value != null) {
           try {

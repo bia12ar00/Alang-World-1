@@ -24,10 +24,17 @@ class _SideMenuState extends State<SideMenu> {
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          const SizedBox(height: 60,),
-          Image.asset(APPImages.IC_SPLASH_LOGO,
-            width: 123, height: 123,),
-          const SizedBox(height: 64,),
+          const SizedBox(
+            height: 60,
+          ),
+          Image.asset(
+            APPImages.IC_SPLASH_LOGO,
+            width: 123,
+            height: 123,
+          ),
+          const SizedBox(
+            height: 64,
+          ),
           ListTile(
             style: ListTileStyle.drawer,
             dense: true,
@@ -67,8 +74,7 @@ class _SideMenuState extends State<SideMenu> {
             title: const Text('My Plan'),
             onTap: () {
               Navigator.pop(context);
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (_) => const MyPlanScreen()));
+              Navigator.push(context, MaterialPageRoute(builder: (_) => const MyPlanScreen()));
             },
           ),
           ListTile(
@@ -94,8 +100,7 @@ class _SideMenuState extends State<SideMenu> {
             title: const Text('Alang World'),
             onTap: () {
               Navigator.pop(context);
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (_) => const AlangWorldScreen()));
+              Navigator.push(context, MaterialPageRoute(builder: (_) => const AlangWorldScreen()));
             },
           ),
           ListTile(
@@ -105,8 +110,7 @@ class _SideMenuState extends State<SideMenu> {
             title: const Text('Contact US'),
             onTap: () {
               Navigator.pop(context);
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (_) => const ContactUsScreen()));
+              Navigator.push(context, MaterialPageRoute(builder: (_) => const ContactUsScreen()));
             },
           ),
           ListTile(
@@ -124,19 +128,20 @@ class _SideMenuState extends State<SideMenu> {
   }
 
   void logout() {
-    AppWidgets.showConfirmationDialog(context, 'Logout',
-        (MediaQuery.of(context).size.height / 100.0) * 19,
-        actionLabelOne: APPStrings.NO,
-        actionLabelTwo: APPStrings.YES, onClickActionOne: () {
-          Navigator.of(context).pop();
-        }, onClickActionTwo: () {
-          PreferenceHelper.clear();
-          Navigator.of(context).pop();
-          Navigator.pop(context);
-          Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(builder: (_) => WithOutLoginNavigation(selectedIndex: 0,)),
-                  (route) => false);
-        });
+    AppWidgets.showConfirmationDialog(context, 'Logout', (MediaQuery.of(context).size.height / 100.0) * 19,
+        actionLabelOne: APPStrings.NO, actionLabelTwo: APPStrings.YES, onClickActionOne: () {
+      Navigator.of(context).pop();
+    }, onClickActionTwo: () {
+      PreferenceHelper.clear();
+      Navigator.of(context).pop();
+      Navigator.pop(context);
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+              builder: (_) => WithOutLoginNavigation(
+                    selectedIndex: 0,
+                  )),
+          (route) => false);
+    });
   }
 }
