@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -207,7 +208,7 @@ class _BuyerHomeScreenState extends State<BuyerHomeScreen> {
                     physics: const NeverScrollableScrollPhysics(),
                     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 3,
-                      crossAxisSpacing: 5.0,
+                      crossAxisSpacing: 3.0,
                       childAspectRatio: 10 / 11,
                     ),
                     itemCount: catModel.length,
@@ -224,47 +225,46 @@ class _BuyerHomeScreenState extends State<BuyerHomeScreen> {
   }
 
   Widget catItem(CategoryModel catItem) {
-    return Padding(
-      padding: const EdgeInsets.all(5.0),
-      child: Card(
-        color: AppColors.colorLightBlueGrey,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(10.0)),
-        ),
+    return Card(
+      color: AppColors.colorLightBlueGrey,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(10.0)),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.only(top: 3.0, bottom: 3),
         child: Column(
           // mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Expanded(
-              flex: 2,
-              child: ClipRRect(
-                clipBehavior: Clip.hardEdge,
-                borderRadius: const BorderRadius.only(topLeft: Radius.circular(10.0), topRight: Radius.circular(10.0)),
-                child: Image.asset(
-                  catItem.image,
-                  // height: MediaQuery.of(context).size.height * 0.1,
-                  fit: BoxFit.contain,
-                  width: 46,
-                  height: 46,
-                  errorBuilder: (context, error, stackTrace) {
-                    return const Icon(
-                      Icons.error_outline,
-                      color: AppColors.PRIMARY_TEXT_COLOR,
-                      size: 30,
-                    );
-                  },
-                ),
+            ClipRRect(
+              clipBehavior: Clip.hardEdge,
+              borderRadius: const BorderRadius.only(topLeft: Radius.circular(10.0), topRight: Radius.circular(10.0)),
+              child: Image.asset(
+                catItem.image,
+                // height: MediaQuery.of(context).size.height * 0.1,
+                fit: BoxFit.contain,
+                width: 46,
+                height: 46,
+                errorBuilder: (context, error, stackTrace) {
+                  return const Icon(
+                    Icons.error_outline,
+                    color: AppColors.PRIMARY_TEXT_COLOR,
+                    size: 30,
+                  );
+                },
               ),
             ),
             const SizedBox(height: 10),
             Padding(
-              padding: const EdgeInsets.only(left: 8.0, right: 8.0, bottom: 20),
+              // padding: const EdgeInsets.all(0),
+              padding: const EdgeInsets.only(left: 4.0, right: 4.0, bottom: 2),
               child: Center(
-                child: Text(
+                child: AutoSizeText(
                   catItem.name,
                   textAlign: TextAlign.center,
-                  style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 12),
+                  style: const TextStyle(fontSize: 12.0),
+                  maxLines: 3,
                 ),
               ),
             )

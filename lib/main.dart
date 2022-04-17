@@ -25,7 +25,7 @@ void main() async {
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   // If you're going to use other Firebase servservicesices in the background, such as Firestore,
   // make sure you call initializeApp before using other Firebase .
-  if(Platform.isAndroid){
+  if (Platform.isAndroid) {
     await Firebase.initializeApp();
   }
 
@@ -38,24 +38,25 @@ var routes = <String, WidgetBuilder>{
 };
 
 class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   _MyAppState createState() => _MyAppState();
 }
 
-class _MyAppState extends State<MyApp>{
-
+class _MyAppState extends State<MyApp> {
   final Locale _appLocale = const Locale('en');
 
   @override
   Widget build(BuildContext context) {
     if (Platform.isIOS) {
-      SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light.copyWith(
-          statusBarBrightness:
-          Brightness.light // Dark == white status bar -- for IOS.
-      ));
+      SystemChrome.setSystemUIOverlayStyle(
+          SystemUiOverlayStyle.light.copyWith(statusBarBrightness: Brightness.light // Dark == white status bar -- for IOS.
+              ));
     } else {
-      SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light.copyWith(statusBarBrightness: Brightness.light // Dark == white status bar -- for IOS.
-      ));
+      SystemChrome.setSystemUIOverlayStyle(
+          SystemUiOverlayStyle.light.copyWith(statusBarBrightness: Brightness.light // Dark == white status bar -- for IOS.
+              ));
     }
     return MultiProvider(
         builder: (context, widget) => MaterialApp(
@@ -68,13 +69,13 @@ class _MyAppState extends State<MyApp>{
             debugShowCheckedModeBanner: false,
             initialRoute: AppRoutes.ROUTES_SPLASH,
             routes: routes),
-            providers: [
+        providers: [
           ChangeNotifierProvider(
             create: (_) => AuthProvider(_),
-          ), ChangeNotifierProvider(
+          ),
+          ChangeNotifierProvider(
             create: (_) => HomeProvider(_),
           ),
         ]);
   }
 }
-
