@@ -1,6 +1,8 @@
 import 'package:connectivity/connectivity.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:provider/provider.dart';
 import 'package:sb_portal/ui/auth/model/CommonModel.dart';
@@ -40,213 +42,339 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
         inAsyncCall: mHomeProvider!.isRequestSend,
         child: Scaffold(
           backgroundColor: AppColors.colorWhite,
-          body: myProfileModel.results != null ?
-          Column(
-            children: [
-              const SizedBox(height: 16),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
-                  decoration: BoxDecoration(
-                    color: AppColors.colorLightBlueGrey,
-                    border: Border.all(color: AppColors.colorBorder, width: 1.0),
-                    borderRadius: const BorderRadius.all(Radius.circular(8)),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(height: 8),
-                      Align(
-                        child: Text(
-                          'My Profile',
-                          style: AppFont.NUNITO_SEMI_BOLD_BLACK_24,
+          body: myProfileModel.results != null
+              ? Column(
+                  children: [
+                    const SizedBox(height: 16),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 24),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 24, vertical: 8),
+                        decoration: BoxDecoration(
+                          color: AppColors.colorLightBlueGrey,
+                          border: Border.all(
+                              color: AppColors.colorBorder, width: 1.0),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(8)),
                         ),
-                        alignment: Alignment.center,
-                      ),
-                      const SizedBox(height: 16),
-                      Row(
-                        children: [
-                          const Icon(
-                            Icons.business,
-                          ),
-                          const SizedBox(width: 12),
-                          Text(
-                            myProfileModel.results!.profile!.company!,
-                            style: AppFont.NUNITO_SEMI_BOLD_BLACK_16,
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 16),
-                      Row(
-                        children: [
-                          const Icon(
-                            Icons.account_circle,
-                          ),
-                          const SizedBox(width: 12),
-                          Text(
-                            myProfileModel.results!.profile!.name!,
-                            style: AppFont.NUNITO_SEMI_BOLD_BLACK_16,
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 16),
-                      Row(
-                        children: [
-                          const Icon(
-                            Icons.call,
-                          ),
-                          const SizedBox(width: 12),
-                          Text(
-                            myProfileModel.results!.profile!.mobile!,
-                            style: AppFont.NUNITO_SEMI_BOLD_BLACK_16,
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 16),
-                      Row(
-                        children: [
-                          const Icon(
-                            Icons.email,
-                          ),
-                          const SizedBox(width: 12),
-                          Text(
-                            myProfileModel.results!.profile!.email!,
-                            style: AppFont.NUNITO_SEMI_BOLD_BLACK_16,
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 16),
-                      Row(
-                        children: [
-                          const Icon(
-                            Icons.location_on,
-                          ),
-                          const SizedBox(width: 12),
-                          Text(
-                            myProfileModel.results!.profile!.address!,
-                            style: AppFont.NUNITO_SEMI_BOLD_BLACK_16,
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 16),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const SizedBox(height: 8),
+                            Row(
                               children: [
-                                Text(
-                                  'City',
-                                  style: AppFont.NUNITO_SEMI_BOLD_BLACK_16,
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'My Profile',
+                                      style: AppFont.NUNITO_SEMI_BOLD_BLACK_24,
+                                    ),
+                                    Container(
+                                      color: Colors.black.withOpacity(0.4),
+                                      height: 2,
+                                      width: 80,
+                                    ),
+                                  ],
                                 ),
-                                const Divider(
-                                  thickness: 2,
-                                  endIndent: 20,
-                                ),
-                                Text(
-                                  myProfileModel.results!.profile!.district!,
-                                  style: AppFont.NUNITO_BOLD_BLACK_16,
+                                const Spacer(),
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: (_) =>
+                                                const EditProfileScreen()));
+                                  },
+                                  child: Container(
+                                    height: 25,
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10),
+                                    decoration: BoxDecoration(
+                                        color: Colors.black.withOpacity(0.8),
+                                        borderRadius: BorderRadius.circular(3)),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: const [
+                                        Icon(
+                                          FontAwesomeIcons.penToSquare,
+                                          color: Colors.white,
+                                          size: 15,
+                                        ),
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+                                        Text("EDIT",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontFamily: 'RobotRegular')),
+                                      ],
+                                    ),
+                                  ),
                                 ),
                               ],
                             ),
-                          ),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                            const SizedBox(height: 16),
+                            Row(
                               children: [
+                                const Icon(
+                                  Icons.business,
+                                ),
+                                const SizedBox(width: 10),
                                 Text(
-                                  'State',
+                                  myProfileModel.results!.profile!.company!,
                                   style: AppFont.NUNITO_SEMI_BOLD_BLACK_16,
-                                ),
-                                const Divider(
-                                  thickness: 2,
-                                  endIndent: 20,
-                                ),
-                                Text(
-                                  myProfileModel.results!.profile!.state!,
-                                  style: AppFont.NUNITO_BOLD_BLACK_16,
                                 ),
                               ],
                             ),
-                          ),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                            const SizedBox(height: 5),
+                            Row(
                               children: [
+                                const Icon(
+                                  Icons.account_circle,
+                                ),
+                                const SizedBox(width: 10),
                                 Text(
-                                  'Country',
+                                  myProfileModel.results!.profile!.name!,
                                   style: AppFont.NUNITO_SEMI_BOLD_BLACK_16,
-                                ),
-                                const Divider(
-                                  thickness: 2,
-                                  endIndent: 20,
-                                ),
-                                Text(
-                                  myProfileModel.results!.profile!.country!,
-                                  style: AppFont.NUNITO_BOLD_BLACK_16,
                                 ),
                               ],
                             ),
-                          )
-                        ],
-                      ),
-                      const SizedBox(height: 32),
-                      Align(
-                        alignment: Alignment.center,
-                        child: GestureDetector(
-                          child: Material(
-                            elevation: 0.0,
-                            borderRadius: BorderRadius.circular(8),
-                            color: AppColors.colorOrange,
-                            child: Container(
-                              alignment: Alignment.center,
-                              height: 40,
-                              child: MaterialButton(
-                                  onPressed: null,
-                                  child: Text('EDIT PROFILE',
-                                      style: AppFont.NUNITO_BOLD_WHITE_24)),
+                            const SizedBox(height: 5),
+                            Row(
+                              children: [
+                                const Icon(
+                                  Icons.call,
+                                ),
+                                const SizedBox(width: 10),
+                                Text(
+                                  myProfileModel.results!.profile!.mobile!,
+                                  style: AppFont.NUNITO_SEMI_BOLD_BLACK_16,
+                                ),
+                              ],
                             ),
-                          ),
-                          onTap: () {
-                            NavKey.navKey.currentState!.push(MaterialPageRoute(builder: (_) =>
-                            EditProfileScreen(myProfileModel: myProfileModel,)));
-
-                          },
+                            const SizedBox(height: 5),
+                            Row(
+                              children: [
+                                const Icon(
+                                  Icons.email,
+                                ),
+                                const SizedBox(width: 10),
+                                Text(
+                                  myProfileModel.results!.profile!.email!,
+                                  style: AppFont.NUNITO_SEMI_BOLD_BLACK_16,
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 5),
+                            Row(
+                              children: [
+                                const Icon(
+                                  Icons.cake_outlined,
+                                ),
+                                const SizedBox(width: 10),
+                                Text(
+                                  myProfileModel.results?.profile
+                                          ?.establishment_date ??
+                                      "",
+                                  style: AppFont.NUNITO_SEMI_BOLD_BLACK_16,
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 5),
+                            Row(
+                              children: [
+                                const Icon(
+                                  Icons.location_on,
+                                ),
+                                const SizedBox(width: 10),
+                                Text(
+                                  myProfileModel.results!.profile!.address!,
+                                  style: AppFont.NUNITO_SEMI_BOLD_BLACK_16,
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 5),
+                            Row(
+                              children: [
+                                const Icon(
+                                  Icons.location_on_outlined,
+                                ),
+                                const SizedBox(width: 10),
+                                Text(
+                                  myProfileModel.results!.profile!.pincode!,
+                                  style: AppFont.NUNITO_SEMI_BOLD_BLACK_16,
+                                ),
+                                const Spacer(),
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 50),
+                                  child: Row(
+                                    children: [
+                                      Image.asset(
+                                          "assets/images/gender_icon.png"),
+                                      const SizedBox(
+                                        width: 10,
+                                      ),
+                                      Text(
+                                          myProfileModel
+                                              .results!.profile!.gender!,
+                                          style: TextStyle(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.w500,
+                                              color:
+                                                  Colors.black.withOpacity(1.0),
+                                              fontFamily: 'RobotRegular'))
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                            const SizedBox(height: 10),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'City',
+                                        style: TextStyle(
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.w500,
+                                            color:
+                                                Colors.black.withOpacity(1.0),
+                                            fontFamily: 'RobotRegular'),
+                                      ),
+                                      const Divider(
+                                        thickness: 2,
+                                        endIndent: 20,
+                                        color: Colors.black,
+                                        height: 3,
+                                      ),
+                                      Text(
+                                        myProfileModel
+                                            .results!.profile!.district!,
+                                        style: AppFont.NUNITO_BOLD_BLACK_16,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'State',
+                                        style: TextStyle(
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.w500,
+                                            color:
+                                                Colors.black.withOpacity(1.0),
+                                            fontFamily: 'RobotRegular'),
+                                      ),
+                                      const Divider(
+                                        thickness: 2,
+                                        endIndent: 20,
+                                        color: Colors.black,
+                                        height: 3,
+                                      ),
+                                      Text(
+                                        myProfileModel.results!.profile!.state!,
+                                        style: AppFont.NUNITO_BOLD_BLACK_16,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Country',
+                                        style: TextStyle(
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.w500,
+                                            color:
+                                                Colors.black.withOpacity(1.0),
+                                            fontFamily: 'RobotRegular'),
+                                      ),
+                                      const Divider(
+                                        thickness: 2,
+                                        endIndent: 20,
+                                        color: Colors.black,
+                                        height: 3,
+                                      ),
+                                      Text(
+                                        myProfileModel
+                                            .results!.profile!.country!,
+                                        style: AppFont.NUNITO_BOLD_BLACK_16,
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                            const SizedBox(height: 5),
+                            // Align(
+                            //   alignment: Alignment.center,
+                            //   child: GestureDetector(
+                            //     child: Material(
+                            //       elevation: 0.0,
+                            //       borderRadius: BorderRadius.circular(8),
+                            //       color: AppColors.colorOrange,
+                            //       child: Container(
+                            //         alignment: Alignment.center,
+                            //         height: 40,
+                            //         child: MaterialButton(
+                            //             onPressed: null,
+                            //             child: Text('EDIT PROFILE',
+                            //                 style: AppFont.NUNITO_BOLD_WHITE_24)),
+                            //       ),
+                            //     ),
+                            //     onTap: () {
+                            //       NavKey.navKey.currentState!.push(MaterialPageRoute(builder: (_) =>
+                            //       EditProfileScreen(myProfileModel: myProfileModel,)));
+                            //
+                            //     },
+                            //   ),
+                            // ),
+                            // const SizedBox(height: 12),
+                            // Align(
+                            //   alignment: Alignment.center,
+                            //   child: GestureDetector(
+                            //     child: Material(
+                            //       elevation: 0.0,
+                            //       borderRadius: BorderRadius.circular(8),
+                            //       color: AppColors.colorOrange,
+                            //       child: Container(
+                            //         alignment: Alignment.center,
+                            //         height: 40,
+                            //         child: MaterialButton(
+                            //             onPressed: null,
+                            //             child: Text('CHANGE PASSWORD',
+                            //                 style: AppFont.NUNITO_BOLD_WHITE_24)),
+                            //       ),
+                            //     ),
+                            //     onTap: () {
+                            //       NavKey.navKey.currentState!.push(MaterialPageRoute(builder: (_) =>
+                            //           const SellerChangePasswordScreen()));
+                            //
+                            //     },
+                            //   ),
+                            // ),
+                            // const SizedBox(height: 32),
+                          ],
                         ),
                       ),
-                      const SizedBox(height: 12),
-                      Align(
-                        alignment: Alignment.center,
-                        child: GestureDetector(
-                          child: Material(
-                            elevation: 0.0,
-                            borderRadius: BorderRadius.circular(8),
-                            color: AppColors.colorOrange,
-                            child: Container(
-                              alignment: Alignment.center,
-                              height: 40,
-                              child: MaterialButton(
-                                  onPressed: null,
-                                  child: Text('CHANGE PASSWORD',
-                                      style: AppFont.NUNITO_BOLD_WHITE_24)),
-                            ),
-                          ),
-                          onTap: () {
-                            NavKey.navKey.currentState!.push(MaterialPageRoute(builder: (_) =>
-                                const SellerChangePasswordScreen()));
-
-                          },
-                        ),
-                      ),
-                      const SizedBox(height: 32),
-                    ],
-                  ),
-                ),
-              )
-            ],
-          ) : const SizedBox(),
+                    )
+                  ],
+                )
+              : const SizedBox(),
         ),
       ),
     );

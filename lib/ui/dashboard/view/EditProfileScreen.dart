@@ -63,15 +63,16 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   @override
   void initState() {
     callCountryListApi();
-    _nameController.text = widget.myProfileModel!.results!.profile!.name!;
-    _mobileController.text = widget.myProfileModel!.results!.profile!.mobile!;
-    _emailController.text = widget.myProfileModel!.results!.profile!.email!;
-    _companyAddressController.text = widget.myProfileModel!.results!.profile!.address!;
-    _pinCodeController.text = widget.myProfileModel!.results!.profile!.pincode!;
-    if (widget.myProfileModel!.results!.profile!.establishment_date != null) {
-      _dateOfBirthController.text = widget.myProfileModel!.results!.profile!.establishment_date!;
-    }
-    selectGender = widget.myProfileModel!.results!.profile!.gender!;
+    print(callCountryListApi);
+   _nameController.text = widget.myProfileModel!.results!.profile!.name!;
+   _mobileController.text = widget.myProfileModel!.results!.profile!.mobile!;
+   _emailController.text = widget.myProfileModel!.results!.profile!.email!;
+   _companyAddressController.text = widget.myProfileModel!.results!.profile!.address!;
+   _pinCodeController.text = widget.myProfileModel!.results!.profile!.pincode!;
+   if (widget.myProfileModel!.results!.profile!.establishment_date != null) {
+     _dateOfBirthController.text = widget.myProfileModel!.results!.profile!.establishment_date!;
+   }
+   selectGender = widget.myProfileModel!.results!.profile!.gender!;
     super.initState();
   }
 
@@ -378,7 +379,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             child: Container(
                               alignment: Alignment.center,
                               height: 40,
-                              child: MaterialButton(onPressed: null, child: Text('UPDATE', style: AppFont.NUNITO_BOLD_WHITE_24)),
+                              child: Text('UPDATE', style: AppFont.NUNITO_BOLD_WHITE_24),
                             ),
                           ),
                           onTap: () {
@@ -457,8 +458,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         APPStrings.paramEstablishmentDate: _dateOfBirthController.text.toString(),
         APPStrings.paramGender: selectGender!,
       };
-
       mHomeProvider!.editProfile(body).then((value) {
+        print( mHomeProvider!.editProfile);
         if (value != null) {
           try {
             CommonModel streams = CommonModel.fromJson(value);

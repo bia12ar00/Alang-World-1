@@ -95,6 +95,7 @@ class AuthProvider extends ChangeNotifier {
       isRequestSend = false;
       notifyListeners();
       Map<String, dynamic> data = jsonDecode(value);
+      print(data);
       return data;
     }).catchError((e) {
       isRequestSend = false;

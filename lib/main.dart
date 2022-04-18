@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +6,9 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:sb_portal/ui/auth/provider/AuthProvider.dart';
 import 'package:sb_portal/ui/dashboard/provider/HomeProvider.dart';
+import 'package:sb_portal/ui/dashboard/view/MyProfileScreen.dart';
+import 'package:sb_portal/ui/dashboard/view/buyer/BuyerEditProfileScreen.dart';
+import 'package:sb_portal/ui/dashboard/view/buyer/BuyerMyProfileSCreen.dart';
 import 'package:sb_portal/ui/helper/FirebaseNotificationHelper.dart';
 import 'package:sb_portal/ui/splash/SplashScreen.dart';
 import 'package:sb_portal/utils/NavKey.dart';
@@ -28,7 +30,6 @@ Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   if (Platform.isAndroid) {
     await Firebase.initializeApp();
   }
-
   debugPrint("RemoteMessage Background");
   FirebaseNotificationHelper.getInstance().showNotification(message);
 }
