@@ -83,156 +83,174 @@ class _SellerOtpVerifyScreenState extends State<SellerOtpVerifyScreen> {
       child: SafeArea(
         child: Scaffold(
           backgroundColor: AppColors.colorWhite,
-          body: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 32),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text('VERIFY DETAILS', style: AppFont.NUNITO_SEMI_BOLD_BLACK_24,),
-                const SizedBox(height: 24),
-                Text("Verify Your Mobile Number for\nVerify Details", style: AppFont.NUNITO_REGULAR_DARK_CHARCOAl_BLACK_16,
-                textAlign: TextAlign.center,),
-                const SizedBox(height: 16),
-                Form(
-                  key: formKey,
-                  child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 8.0, horizontal: 32),
-                      child: PinCodeTextField(
-                        appContext: context,
-                        textStyle: const TextStyle(
-                          color: AppColors.colorLightBrown,
+          appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+          ),
+          body: SingleChildScrollView(
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 32),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('VERIFY DETAILS', style: AppFont.NUNITO_SEMI_BOLD_BLACK_24,),
+                  const SizedBox(height: 24),
+                  Text("Verify Your Mobile Number for\nVerify Details", style: AppFont.NUNITO_REGULAR_DARK_CHARCOAl_BLACK_16,
+                  textAlign: TextAlign.center,),
+                  const SizedBox(height: 16),
+                  Form(
+                    key: formKey,
+                    child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 8.0, horizontal: 32),
+                        child: PinCodeTextField(
+                          appContext: context,
+                          textStyle: const TextStyle(
+                            color: AppColors.colorLightBrown,
+                          ),
+                          showCursor: false,
+                          length: 6,
+                          blinkWhenObscuring: true,
+                          hintCharacter: "0",
+                          hintStyle: AppFont.ROBOT_REGULAR_BLACK_14,
+                          animationType: AnimationType.fade,
+                          pinTheme: PinTheme(
+                              shape: PinCodeFieldShape.box,
+                              borderRadius: BorderRadius.circular(1),
+                              fieldHeight: 50,
+                              fieldWidth: 50,
+                              activeFillColor: AppColors.colorWhite,
+                              activeColor: AppColors.colorWhite,
+                              selectedFillColor: AppColors.colorWhite,
+                              selectedColor: AppColors.colorWhite,
+                              inactiveFillColor: AppColors.colorWhite,
+                              inactiveColor: AppColors.colorWhite),
+                          autoFocus: true,
+                          cursorColor: AppColors.colorBrown,
+                          animationDuration: const Duration(milliseconds: 300),
+                          enableActiveFill: true,
+                          errorAnimationController: errorController,
+                          controller: _otpController,
+                          keyboardType: TextInputType.number,
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly
+                          ],
+                          boxShadows: const [
+                            BoxShadow(
+                              color: Colors.black12,
+                              blurRadius: 0.5,
+                            )
+                          ],
+                          onCompleted: (v) {
+                            print("Completed $v");
+                          },
+                          onChanged: (value) {
+                            print(value);
+                            setState(() {
+                              smsOTP = value;
+                            });
+                          },
+                          beforeTextPaste: (text) {
+                            print("Allowing to paste $text");
+                            return true;
+                          },
+                        )),
+                  ),
+                  const SizedBox(height: 32),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(_timerStart,
+                          style: AppFont.NUNITO_REGULAR_BLACK_18)
+                    ],
+                  ),
+                  Text('(OTP Waiting Time)',
+                      style: AppFont.NUNITO_REGULAR_BLACK_14),
+                  const SizedBox(height: 40),
+                  GestureDetector(
+                    child: Material(
+                      elevation: 0.0,
+                      borderRadius: BorderRadius.circular(8),
+                      color: AppColors.colorOrange,
+                      child: Container(
+                        alignment: Alignment.center,
+                        height: 40,
+                        child: MaterialButton(
+                            onPressed: null,
+                            child: Text('VERIFY NOW',
+                                style: AppFont.NUNITO_BOLD_WHITE_24)),
+                      ),
+                    ),
+                    onTap: () {
+                      if (smsOTP == null || smsOTP!.length < 4) {
+                        Fluttertoast.showToast(msg: 'Please enter otp');
+                      } else if(_otpController.text.toString().trim().length < 4) {
+                        Fluttertoast.showToast(msg: 'Please enter valid otp');
+                      } else {
+                        callVerifyOtp();
+                      }
+                    },
+                  ),
+                  const SizedBox(height: 12),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Not Received?',
+                        textAlign: TextAlign.start,
+                        style: AppFont.NUNITO_REGULAR_BLACK_14,
+                      ),
+                      const SizedBox(
+                        width: 4,
+                      ),
+                      InkWell(
+                        onTap: () {
+                          _otpController.clear();
+                          if (isResend) {
+                            setState(() {
+                              _start = 30;
+                              isResend = false;
+                            });
+                            startTimer();
+                          }
+                        },
+                        child: Text(
+                          ' Resend',
+                          textAlign: TextAlign.start,
+                          style: TextStyle(
+                            decoration: TextDecoration.underline,
+                            fontFamily: 'NunitoSemiBold',
+                            color: isResend
+                                ? AppColors.colorBrown
+                                : AppColors.colorLightBrown,
+                          ),
                         ),
-                        showCursor: false,
-                        length: 4,
-                        blinkWhenObscuring: true,
-                        hintCharacter: "0",
-                        hintStyle: AppFont.ROBOT_REGULAR_BLACK_14,
-                        animationType: AnimationType.fade,
-                        pinTheme: PinTheme(
-                            shape: PinCodeFieldShape.box,
-                            borderRadius: BorderRadius.circular(1),
-                            fieldHeight: 50,
-                            fieldWidth: 50,
-                            activeFillColor: AppColors.colorWhite,
-                            activeColor: AppColors.colorWhite,
-                            selectedFillColor: AppColors.colorWhite,
-                            selectedColor: AppColors.colorWhite,
-                            inactiveFillColor: AppColors.colorWhite,
-                            inactiveColor: AppColors.colorWhite),
-                        autoFocus: true,
-                        cursorColor: AppColors.colorBrown,
-                        animationDuration: const Duration(milliseconds: 300),
-                        enableActiveFill: true,
-                        errorAnimationController: errorController,
-                        controller: _otpController,
-                        keyboardType: TextInputType.number,
-                        inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly
-                        ],
-                        boxShadows: const [
-                          BoxShadow(
-                            color: Colors.black12,
-                            blurRadius: 0.5,
-                          )
-                        ],
-                        onCompleted: (v) {
-                          print("Completed $v");
-                        },
-                        onChanged: (value) {
-                          print(value);
-                          setState(() {
-                            smsOTP = value;
-                          });
-                        },
-                        beforeTextPaste: (text) {
-                          print("Allowing to paste $text");
-                          return true;
-                        },
-                      )),
-                ),
-                const SizedBox(height: 32),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(_timerStart,
-                        style: AppFont.NUNITO_REGULAR_BLACK_18)
-                  ],
-                ),
-                Text('(OTP Waiting Time)',
-                    style: AppFont.NUNITO_REGULAR_BLACK_14),
-                const SizedBox(height: 40),
-                GestureDetector(
-                  child: Material(
-                    elevation: 0.0,
-                    borderRadius: BorderRadius.circular(8),
-                    color: AppColors.colorOrange,
-                    child: Container(
-                      alignment: Alignment.center,
-                      height: 40,
-                      child: MaterialButton(
-                          onPressed: null,
-                          child: Text('VERIFY NOW',
-                              style: AppFont.NUNITO_BOLD_WHITE_24)),
+                      )
+                    ],
+                  ),
+                  const SizedBox(height: 10,),
+                  InkWell(
+                    onTap: () {
+                      NavKey.navKey.currentState!.pop();
+                      NavKey.navKey.currentState!.pop();
+                      // NavKey.navKey.currentState!.pop();
+                    },
+                    child: const Text(
+                      'BACK TO HOME',
+                      style: TextStyle(decoration: TextDecoration.underline),
                     ),
                   ),
-                  onTap: () {
-                    if (smsOTP == null || smsOTP!.length < 4) {
-                      Fluttertoast.showToast(msg: 'Please enter otp');
-                    } else if(_otpController.text.toString().trim().length < 4) {
-                      Fluttertoast.showToast(msg: 'Please enter valid otp');
-                    } else {
-                      callVerifyOtp();
-                    }
-                  },
-                ),
-                const SizedBox(height: 12),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Not Received?',
-                      textAlign: TextAlign.start,
-                      style: AppFont.NUNITO_REGULAR_BLACK_14,
-                    ),
-                    const SizedBox(
-                      width: 4,
-                    ),
-                    InkWell(
-                      onTap: () {
-                        _otpController.clear();
-                        if (isResend) {
-                          setState(() {
-                            _start = 30;
-                            isResend = false;
-                          });
-                          startTimer();
-                        }
-                      },
-                      child: Text(
-                        ' Resend',
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                          decoration: TextDecoration.underline,
-                          fontFamily: 'NunitoSemiBold',
-                          color: isResend
-                              ? AppColors.colorBrown
-                              : AppColors.colorLightBrown,
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-                const SizedBox(height: 32),
-                Image.asset(
-                  APPImages.IC_SPLASH_LOGO,
-                  width: 163,
-                  height: 163,
-                ),
-                const SizedBox(height: 32),
-              ],
+                  const SizedBox(height: 32),
+                  Image.asset(
+                    APPImages.IC_SPLASH_LOGO,
+                    width: 163,
+                    height: 163,
+                  ),
+                  const SizedBox(height: 32),
+                ],
+              ),
             ),
           ),
         ),

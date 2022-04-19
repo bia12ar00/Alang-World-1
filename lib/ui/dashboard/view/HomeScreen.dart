@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -46,10 +48,12 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Column(
               children: [
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
                   decoration: BoxDecoration(
                     color: AppColors.colorWhite,
-                    border: Border.all(color: AppColors.colorBorder, width: 1.0),
+                    border:
+                        Border.all(color: AppColors.colorBorder, width: 1.0),
                     borderRadius: const BorderRadius.all(Radius.circular(8)),
                   ),
                   child: Row(
@@ -68,7 +72,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               isDense: true,
                               hintText: 'Search product',
                               hintStyle: AppFont.NUNITO_REGULAR_BLACK_14,
-                              floatingLabelBehavior: FloatingLabelBehavior.never,
+                              floatingLabelBehavior:
+                                  FloatingLabelBehavior.never,
                               border: InputBorder.none),
                         ),
                       ),
@@ -84,18 +89,25 @@ class _HomeScreenState extends State<HomeScreen> {
                         padding: const EdgeInsets.symmetric(horizontal: 16),
                         decoration: BoxDecoration(
                           color: AppColors.colorLightBlueGrey,
-                          border: Border.all(color: AppColors.colorBorder, width: 1.0),
-                          borderRadius: const BorderRadius.all(Radius.circular(8)),
+                          border: Border.all(
+                              color: AppColors.colorBorder, width: 1.0),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(8)),
                         ),
                         child: Column(
                           children: [
                             const SizedBox(height: 16),
-                            Text('Total Number of Product :${productListModel.results!.count!.noOfAllowedProducts!.toString()}'),
+                            Text(
+                                'Total Number of Product :${productListModel.results!.count!.noOfAllowedProducts!.toString()}'),
                             const SizedBox(height: 16),
                             Row(
                               children: [
-                                Expanded(child: Text('Uploaded Product: ${productListModel.results!.count!.totalUploadedProducts!.toString()}')),
-                                Expanded(child: Text('Remaining Product: ${productListModel.results!.count!.totalRemainingProducts!.toString()}')),
+                                Expanded(
+                                    child: Text(
+                                        'Uploaded Product: ${productListModel.results!.count!.totalUploadedProducts!.toString()}')),
+                                Expanded(
+                                    child: Text(
+                                        'Remaining Product: ${productListModel.results!.count!.totalRemainingProducts!.toString()}')),
                               ],
                             ),
                             const SizedBox(height: 16),
@@ -116,14 +128,17 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           )
                         : const SizedBox()
-                    : productListModel.results != null && productListModel.results!.product!.isNotEmpty
+                    : productListModel.results != null &&
+                            productListModel.results!.product!.isNotEmpty
                         ? Expanded(
                             child: ListView.builder(
                             shrinkWrap: true,
                             itemBuilder: (context, index) {
-                              return buildProductItem(productListModel.results!.product![index]);
+                              return buildProductItem(
+                                  productListModel.results!.product![index]);
                             },
-                            itemCount: productListModel.results!.product!.length,
+                            itemCount:
+                                productListModel.results!.product!.length,
                           ))
                         : const SizedBox(),
               ],
@@ -163,7 +178,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 width: 100,
                 height: 100,
                 fit: BoxFit.fill,
-                errorBuilder: (BuildContext? context, Object? exception, StackTrace? stackTrace) {
+                errorBuilder: (BuildContext? context, Object? exception,
+                    StackTrace? stackTrace) {
                   return const Icon(
                     Icons.error_outlined,
                     size: 100,
@@ -175,9 +191,15 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(product.productName!),
+                    Text(
+                      product.productName!,
+                      style: TextStyle(fontSize: 12),
+                    ),
                     const SizedBox(height: 8),
-                    Text(product.categoryname!),
+                    Text(
+                      product.categoryname!,
+                      style: TextStyle(fontSize: 8),
+                    ),
                   ],
                 ),
               )
@@ -191,7 +213,8 @@ class _HomeScreenState extends State<HomeScreen> {
   callProductListApi() async {
     String sellerID = PreferenceHelper.getString(PreferenceHelper.SELLER_ID);
     var connectivityResult = await (Connectivity().checkConnectivity());
-    if (connectivityResult == ConnectivityResult.mobile || connectivityResult == ConnectivityResult.wifi) {
+    if (connectivityResult == ConnectivityResult.mobile ||
+        connectivityResult == ConnectivityResult.wifi) {
       mHomeProvider!.productList(sellerID).then((value) {
         if (value != null) {
           try {
@@ -222,7 +245,8 @@ class _HomeScreenState extends State<HomeScreen> {
     }
 
     for (var userDetail in productListModel.results!.product!) {
-      if (userDetail.productName!.toLowerCase().contains(text.toLowerCase()) || userDetail.categoryname!.toString().contains(text.toLowerCase())) {
+      if (userDetail.productName!.toLowerCase().contains(text.toLowerCase()) ||
+          userDetail.categoryname!.toString().contains(text.toLowerCase())) {
         searchProd.add(userDetail);
       }
     }

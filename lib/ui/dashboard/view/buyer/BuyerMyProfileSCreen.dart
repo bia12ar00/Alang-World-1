@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -60,23 +62,79 @@ class _BuyerMyProfileScreenState extends State<BuyerMyProfileScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const SizedBox(height: 8),
-                            Align(
-                              child: Text(
-                                'My Profile',
-                                style: AppFont.NUNITO_SEMI_BOLD_BLACK_24,
-                              ),
-                              alignment: Alignment.center,
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Column(
+                                  children: [
+                                    Text(
+                                      "My Profile",
+                                      style: TextStyle(
+                                        fontFamily: "InterMedium",
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 2,
+                                    ),
+                                    Container(
+                                      width: 62,
+                                      height: 1,
+                                      color: Colors.black,
+                                    ),
+                                  ],
+                                ),
+                                Container(
+                                  height: 30,
+                                  child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      primary: Colors.black,
+                                    ),
+                                    onPressed: () {
+                                      NavKey.navKey.currentState!.push(
+                                          MaterialPageRoute(
+                                              builder: (_) =>
+                                                  BuyerEditProfileScreen(
+                                                    myProfileModel:
+                                                        myProfileModel,
+                                                  )));
+                                    },
+                                    child: Row(
+                                      children: [
+                                        Image.asset("assets/images/edit.png"),
+                                        SizedBox(
+                                          width: 4,
+                                        ),
+                                        Text(
+                                          "Edit",
+                                          style: TextStyle(
+                                            fontFamily: "InterMedium",
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                             const SizedBox(height: 16),
                             Row(
                               children: [
                                 const Icon(
                                   Icons.account_circle,
+                                  size: 20,
                                 ),
                                 const SizedBox(width: 12),
                                 Text(
                                   myProfileModel.results!.profile!.name!,
-                                  style: AppFont.NUNITO_SEMI_BOLD_BLACK_16,
+                                  style: TextStyle(
+                                    fontFamily: "InterMedium",
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w500,
+                                  ),
                                 ),
                               ],
                             ),
@@ -85,11 +143,16 @@ class _BuyerMyProfileScreenState extends State<BuyerMyProfileScreen> {
                               children: [
                                 const Icon(
                                   Icons.call,
+                                  size: 20,
                                 ),
                                 const SizedBox(width: 12),
                                 Text(
                                   myProfileModel.results!.profile!.mobile!,
-                                  style: AppFont.NUNITO_SEMI_BOLD_BLACK_16,
+                                  style: TextStyle(
+                                    fontFamily: "InterMedium",
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w500,
+                                  ),
                                 ),
                               ],
                             ),
@@ -98,11 +161,16 @@ class _BuyerMyProfileScreenState extends State<BuyerMyProfileScreen> {
                               children: [
                                 const Icon(
                                   Icons.email,
+                                  size: 20,
                                 ),
                                 const SizedBox(width: 12),
                                 Text(
                                   myProfileModel.results!.profile!.email!,
-                                  style: AppFont.NUNITO_SEMI_BOLD_BLACK_16,
+                                  style: TextStyle(
+                                    fontFamily: "InterMedium",
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w500,
+                                  ),
                                 ),
                               ],
                             ),
@@ -115,12 +183,22 @@ class _BuyerMyProfileScreenState extends State<BuyerMyProfileScreen> {
                                   children: [
                                     const Icon(
                                       Icons.cake,
+                                      size: 20,
                                     ),
                                     const SizedBox(width: 12),
                                     Expanded(
                                       child: Text(
-                                        myProfileModel.results!.profile!.company!,
-                                        style: AppFont.NUNITO_SEMI_BOLD_BLACK_16,
+                                        myProfileModel.results!.profile!
+                                                    .company ==
+                                                null
+                                            ? ""
+                                            : myProfileModel
+                                                .results!.profile!.company!,
+                                        style: TextStyle(
+                                          fontFamily: "InterMedium",
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w500,
+                                        ),
                                       ),
                                     ),
                                   ],
@@ -130,11 +208,16 @@ class _BuyerMyProfileScreenState extends State<BuyerMyProfileScreen> {
                                   children: [
                                     const Icon(
                                       Icons.person_outlined,
+                                      size: 20,
                                     ),
                                     const SizedBox(width: 12),
                                     Text(
                                       myProfileModel.results!.profile!.gender!,
-                                      style: AppFont.NUNITO_SEMI_BOLD_BLACK_16,
+                                      style: TextStyle(
+                                        fontFamily: "InterMedium",
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w500,
+                                      ),
                                     ),
                                   ],
                                 ))
@@ -145,112 +228,124 @@ class _BuyerMyProfileScreenState extends State<BuyerMyProfileScreen> {
                               children: [
                                 const Icon(
                                   Icons.location_on,
+                                  size: 20,
                                 ),
                                 const SizedBox(width: 12),
                                 Text(
                                   myProfileModel.results!.profile!.address!,
-                                  style: AppFont.NUNITO_SEMI_BOLD_BLACK_16,
+                                  style: TextStyle(
+                                    fontFamily: "InterMedium",
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w500,
+                                  ),
                                 ),
                               ],
                             ),
                             const SizedBox(height: 16),
                             Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        'City',
-                                        style:
-                                            AppFont.NUNITO_SEMI_BOLD_BLACK_16,
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'City',
+                                      style: TextStyle(
+                                        fontFamily: "InterMedium",
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w500,
                                       ),
-                                      const Divider(
-                                        thickness: 2,
-                                        endIndent: 20,
+                                    ),
+                                    SizedBox(
+                                      height: 2,
+                                    ),
+                                    Container(
+                                      height: 1,
+                                      width: 54,
+                                      color: Colors.black,
+                                    ),
+                                    SizedBox(
+                                      height: 1,
+                                    ),
+                                    Text(
+                                      myProfileModel
+                                          .results!.profile!.district!,
+                                      style: TextStyle(
+                                        fontFamily: "InterMedium",
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w500,
                                       ),
-                                      Text(
-                                        myProfileModel
-                                            .results!.profile!.district!,
-                                        style: AppFont.NUNITO_BOLD_BLACK_16,
-                                      ),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        'State',
-                                        style:
-                                            AppFont.NUNITO_SEMI_BOLD_BLACK_16,
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'State',
+                                      style: TextStyle(
+                                        fontFamily: "InterMedium",
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w500,
                                       ),
-                                      const Divider(
-                                        thickness: 2,
-                                        endIndent: 20,
+                                    ),
+                                    SizedBox(
+                                      height: 2,
+                                    ),
+                                    Container(
+                                      height: 1,
+                                      width: 54,
+                                      color: Colors.black,
+                                    ),
+                                    SizedBox(
+                                      height: 1,
+                                    ),
+                                    Text(
+                                      myProfileModel.results!.profile!.state!,
+                                      style: TextStyle(
+                                        fontFamily: "InterMedium",
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w500,
                                       ),
-                                      Text(
-                                        myProfileModel.results!.profile!.state!,
-                                        style: AppFont.NUNITO_BOLD_BLACK_16,
-                                      ),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        'Country',
-                                        style:
-                                            AppFont.NUNITO_SEMI_BOLD_BLACK_16,
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Country',
+                                      style: TextStyle(
+                                        fontFamily: "InterMedium",
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w500,
                                       ),
-                                      const Divider(
-                                        thickness: 2,
-                                        endIndent: 20,
+                                    ),
+                                    SizedBox(
+                                      height: 2,
+                                    ),
+                                    Container(
+                                      height: 1,
+                                      width: 54,
+                                      color: Colors.black,
+                                    ),
+                                    SizedBox(
+                                      height: 1,
+                                    ),
+                                    Text(
+                                      myProfileModel.results!.profile!.country!,
+                                      style: TextStyle(
+                                        fontFamily: "InterMedium",
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w500,
                                       ),
-                                      Text(
-                                        myProfileModel
-                                            .results!.profile!.country!,
-                                        style: AppFont.NUNITO_BOLD_BLACK_16,
-                                      ),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 )
                               ],
                             ),
                             const SizedBox(height: 32),
-                            Align(
-                              alignment: Alignment.center,
-                              child: GestureDetector(
-                                child: Material(
-                                  elevation: 0.0,
-                                  borderRadius: BorderRadius.circular(8),
-                                  color: AppColors.colorOrange,
-                                  child: Container(
-                                    alignment: Alignment.center,
-                                    height: 40,
-                                    child: MaterialButton(
-                                        onPressed: null,
-                                        child: Text('EDIT PROFILE',
-                                            style:
-                                                AppFont.NUNITO_BOLD_WHITE_24)),
-                                  ),
-                                ),
-                                onTap: () {
-                                  NavKey.navKey.currentState!
-                                      .push(MaterialPageRoute(
-                                          builder: (_) => BuyerEditProfileScreen(
-                                                myProfileModel: myProfileModel,
-                                              )));
-                                },
-                              ),
-                            ),
                             const SizedBox(height: 8),
                             Align(
                               alignment: Alignment.center,
@@ -261,19 +356,25 @@ class _BuyerMyProfileScreenState extends State<BuyerMyProfileScreen> {
                                   color: AppColors.colorOrange,
                                   child: Container(
                                     alignment: Alignment.center,
-                                    height: 40,
+                                    height: 30,
+                                    width: 205,
                                     child: MaterialButton(
                                         onPressed: null,
-                                        child: Text('CHANGE PASSWORD',
-                                            style:
-                                            AppFont.NUNITO_BOLD_WHITE_24)),
+                                        child: Text(
+                                          'CHANGE PASSWORD',
+                                          style: TextStyle(
+                                              fontFamily: "InterMedium",
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w500,
+                                              color: Colors.white),
+                                        )),
                                   ),
                                 ),
                                 onTap: () {
-                                  NavKey.navKey.currentState!
-                                      .push(MaterialPageRoute(
-                                      builder: (_) => const BuyerChangePasswordScreen(
-                                      )));
+                                  NavKey.navKey.currentState!.push(
+                                      MaterialPageRoute(
+                                          builder: (_) =>
+                                              const BuyerChangePasswordScreen()));
                                 },
                               ),
                             ),
