@@ -9,15 +9,15 @@ class SignUpModel {
     response = json['response'];
     message = json['message'];
     results =
-    json['results'] != null ? Results.fromJson(json['results']) : null;
+        json['results'] != null ? new Results.fromJson(json['results']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['response'] = response;
-    data['message'] = message;
-    if (results != null) {
-      data['results'] = results!.toJson();
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['response'] = this.response;
+    data['message'] = this.message;
+    if (this.results != null) {
+      data['results'] = this.results!.toJson();
     }
     return data;
   }
@@ -25,155 +25,165 @@ class SignUpModel {
 
 class Results {
   String? token;
+  String? oTPSession;
   User? user;
 
-  Results({this.token, this.user});
+  Results({this.token, this.oTPSession, this.user});
 
   Results.fromJson(Map<String, dynamic> json) {
     token = json['token'];
-    user = json['user'] != null ? User.fromJson(json['user']) : null;
+    oTPSession = json['OTPSession'];
+    user = json['user'] != null ? new User.fromJson(json['user']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['token'] = token;
-    if (user != null) {
-      data['user'] = user!.toJson();
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['token'] = this.token;
+    data['OTPSession'] = this.oTPSession;
+    if (this.user != null) {
+      data['user'] = this.user!.toJson();
     }
     return data;
   }
 }
 
 class User {
-  int? id;
   String? name;
   String? email;
-  String? emailVerifiedAt;
-  String? createdAt;
+  int? contactVerified;
   String? updatedAt;
-  String? status;
-  String? emailVerified;
-  String? contactVerified;
-  String? trial852;
-  List<AuthAccessToken>? authAccessToken;
+  String? createdAt;
+  int? id;
+  List<Roles>? roles;
+  List<Null>? authAccessToken;
   UserDetails? userDetails;
 
   User(
-      {this.id,
-        this.name,
-        this.email,
-        this.emailVerifiedAt,
-        this.createdAt,
-        this.updatedAt,
-        this.status,
-        this.emailVerified,
-        this.contactVerified,
-        this.trial852,
-        this.authAccessToken,
-        this.userDetails});
+      {this.name,
+      this.email,
+      this.contactVerified,
+      this.updatedAt,
+      this.createdAt,
+      this.id,
+      this.roles,
+      this.authAccessToken,
+      this.userDetails});
 
   User.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
     name = json['name'];
     email = json['email'];
-    emailVerifiedAt = json['email_verified_at'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
-    status = json['status'];
-    emailVerified = json['email_verified'];
     contactVerified = json['contact_verified'];
-    trial852 = json['trial852'];
-    if (json['auth_access_token'] != null) {
-      authAccessToken = <AuthAccessToken>[];
-      json['auth_access_token'].forEach((v) {
-        authAccessToken!.add(AuthAccessToken.fromJson(v));
+    updatedAt = json['updated_at'];
+    createdAt = json['created_at'];
+    id = json['id'];
+    if (json['roles'] != null) {
+      roles = <Roles>[];
+      json['roles'].forEach((v) {
+        roles!.add(new Roles.fromJson(v));
       });
     }
+    // if (json['auth_access_token'] != null) {
+    //   authAccessToken = <Null>[];
+    //   json['auth_access_token'].forEach((v) {
+    //     authAccessToken!.add(new Null.fromJson(v));
+    //   });
+    // }
     userDetails = json['user_details'] != null
-        ? UserDetails.fromJson(json['user_details'])
+        ? new UserDetails.fromJson(json['user_details'])
         : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['name'] = name;
-    data['email'] = email;
-    data['email_verified_at'] = emailVerifiedAt;
-    data['created_at'] = createdAt;
-    data['updated_at'] = updatedAt;
-    data['status'] = status;
-    data['email_verified'] = emailVerified;
-    data['contact_verified'] = contactVerified;
-    data['trial852'] = trial852;
-    if (authAccessToken != null) {
-      data['auth_access_token'] =
-          authAccessToken!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['name'] = this.name;
+    data['email'] = this.email;
+    data['contact_verified'] = this.contactVerified;
+    data['updated_at'] = this.updatedAt;
+    data['created_at'] = this.createdAt;
+    data['id'] = this.id;
+    if (this.roles != null) {
+      data['roles'] = this.roles!.map((v) => v.toJson()).toList();
     }
-    if (userDetails != null) {
-      data['user_details'] = userDetails!.toJson();
+    // if (this.authAccessToken != null) {
+    //   data['auth_access_token'] =
+    //    //   this.authAccessToken!.map((v) => v.toJson()).toList();
+    // }
+    if (this.userDetails != null) {
+      data['user_details'] = this.userDetails!.toJson();
     }
     return data;
   }
 }
 
-class AuthAccessToken {
+class Roles {
   int? id;
-  String? userId;
-  String? clientId;
   String? name;
-  String? scopes;
-  String? revoked;
+  String? guardName;
   String? createdAt;
   String? updatedAt;
-  String? expiresAt;
-  String? trial822;
+  String? trial848;
+  Pivot? pivot;
 
-  AuthAccessToken(
+  Roles(
       {this.id,
-        this.userId,
-        this.clientId,
-        this.name,
-        this.scopes,
-        this.revoked,
-        this.createdAt,
-        this.updatedAt,
-        this.expiresAt,
-        this.trial822});
+      this.name,
+      this.guardName,
+      this.createdAt,
+      this.updatedAt,
+      this.trial848,
+      this.pivot});
 
-  AuthAccessToken.fromJson(Map<String, dynamic> json) {
+  Roles.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    userId = json['user_id'];
-    clientId = json['client_id'];
     name = json['name'];
-    scopes = json['scopes'];
-    revoked = json['revoked'];
+    guardName = json['guard_name'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
-    expiresAt = json['expires_at'];
-    trial822 = json['trial822'];
+    trial848 = json['trial848'];
+    pivot = json['pivot'] != null ? new Pivot.fromJson(json['pivot']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['user_id'] = userId;
-    data['client_id'] = clientId;
-    data['name'] = name;
-    data['scopes'] = scopes;
-    data['revoked'] = revoked;
-    data['created_at'] = createdAt;
-    data['updated_at'] = updatedAt;
-    data['expires_at'] = expiresAt;
-    data['trial822'] = trial822;
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['name'] = this.name;
+    data['guard_name'] = this.guardName;
+    data['created_at'] = this.createdAt;
+    data['updated_at'] = this.updatedAt;
+    data['trial848'] = this.trial848;
+    if (this.pivot != null) {
+      data['pivot'] = this.pivot!.toJson();
+    }
+    return data;
+  }
+}
+
+class Pivot {
+  String? modelId;
+  String? roleId;
+  String? modelType;
+
+  Pivot({this.modelId, this.roleId, this.modelType});
+
+  Pivot.fromJson(Map<String, dynamic> json) {
+    modelId = json['model_id'];
+    roleId = json['role_id'];
+    modelType = json['model_type'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['model_id'] = this.modelId;
+    data['role_id'] = this.roleId;
+    data['model_type'] = this.modelType;
     return data;
   }
 }
 
 class UserDetails {
   String? userId;
-  String? officeNumber;
-  String? profileImage;
+  Null? officeNumber;
+  Null? profileImage;
   String? gender;
   String? address;
   String? userRole;
@@ -181,11 +191,11 @@ class UserDetails {
   String? status;
   String? createdAt;
   String? updatedAt;
-  String? deletedAt;
+  Null? deletedAt;
   String? company;
-  String? contractForm;
-  String? addressProof;
-  String? shift;
+  Null? contractForm;
+  Null? addressProof;
+  Null? shift;
   String? token;
   String? tokenExpiredDate;
   int? id;
@@ -194,33 +204,41 @@ class UserDetails {
   String? country;
   String? uniqueId;
   String? pincode;
-  String? trial848;
+  Null? trial848;
+  Null? dob;
+  Null? establishmentDate;
+  String? wallet;
+  String? firebaseId;
 
   UserDetails(
       {this.userId,
-        this.officeNumber,
-        this.profileImage,
-        this.gender,
-        this.address,
-        this.userRole,
-        this.mobile,
-        this.status,
-        this.createdAt,
-        this.updatedAt,
-        this.deletedAt,
-        this.company,
-        this.contractForm,
-        this.addressProof,
-        this.shift,
-        this.token,
-        this.tokenExpiredDate,
-        this.id,
-        this.district,
-        this.state,
-        this.country,
-        this.uniqueId,
-        this.pincode,
-        this.trial848});
+      this.officeNumber,
+      this.profileImage,
+      this.gender,
+      this.address,
+      this.userRole,
+      this.mobile,
+      this.status,
+      this.createdAt,
+      this.updatedAt,
+      this.deletedAt,
+      this.company,
+      this.contractForm,
+      this.addressProof,
+      this.shift,
+      this.token,
+      this.tokenExpiredDate,
+      this.id,
+      this.district,
+      this.state,
+      this.country,
+      this.uniqueId,
+      this.pincode,
+      this.trial848,
+      this.dob,
+      this.establishmentDate,
+      this.wallet,
+      this.firebaseId});
 
   UserDetails.fromJson(Map<String, dynamic> json) {
     userId = json['user_id'];
@@ -247,34 +265,42 @@ class UserDetails {
     uniqueId = json['unique_id'];
     pincode = json['pincode'];
     trial848 = json['trial848'];
+    dob = json['dob'];
+    establishmentDate = json['establishment_date'];
+    wallet = json['wallet'];
+    firebaseId = json['firebase_id'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['user_id'] = userId;
-    data['office_number'] = officeNumber;
-    data['profile_image'] = profileImage;
-    data['gender'] = gender;
-    data['address'] = address;
-    data['user_role'] = userRole;
-    data['mobile'] = mobile;
-    data['status'] = status;
-    data['created_at'] = createdAt;
-    data['updated_at'] = updatedAt;
-    data['deleted_at'] = deletedAt;
-    data['company'] = company;
-    data['contract_form'] = contractForm;
-    data['address_proof'] = addressProof;
-    data['shift'] = shift;
-    data['token'] = token;
-    data['token_expired_date'] = tokenExpiredDate;
-    data['id'] = id;
-    data['district'] = district;
-    data['state'] = state;
-    data['country'] = country;
-    data['unique_id'] = uniqueId;
-    data['pincode'] = pincode;
-    data['trial848'] = trial848;
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['user_id'] = this.userId;
+    data['office_number'] = this.officeNumber;
+    data['profile_image'] = this.profileImage;
+    data['gender'] = this.gender;
+    data['address'] = this.address;
+    data['user_role'] = this.userRole;
+    data['mobile'] = this.mobile;
+    data['status'] = this.status;
+    data['created_at'] = this.createdAt;
+    data['updated_at'] = this.updatedAt;
+    data['deleted_at'] = this.deletedAt;
+    data['company'] = this.company;
+    data['contract_form'] = this.contractForm;
+    data['address_proof'] = this.addressProof;
+    data['shift'] = this.shift;
+    data['token'] = this.token;
+    data['token_expired_date'] = this.tokenExpiredDate;
+    data['id'] = this.id;
+    data['district'] = this.district;
+    data['state'] = this.state;
+    data['country'] = this.country;
+    data['unique_id'] = this.uniqueId;
+    data['pincode'] = this.pincode;
+    data['trial848'] = this.trial848;
+    data['dob'] = this.dob;
+    data['establishment_date'] = this.establishmentDate;
+    data['wallet'] = this.wallet;
+    data['firebase_id'] = this.firebaseId;
     return data;
   }
 }

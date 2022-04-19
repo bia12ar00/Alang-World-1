@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:sb_portal/ui/dashboard/view/without_login/WithoutLoginALangWorldScreen.dart';
+import 'package:sb_portal/ui/dashboard/view/without_login/WithoutLoginNavigation.dart';
+import 'package:sb_portal/utils/NavKey.dart';
 import 'package:sb_portal/utils/app_colors.dart';
 import 'package:sb_portal/utils/app_font.dart';
 import 'package:sb_portal/utils/app_images.dart';
@@ -13,7 +16,6 @@ class PurchasePlanScreen extends StatefulWidget {
 }
 
 class _PurchasePlanScreenState extends State<PurchasePlanScreen> {
-
   @override
   Widget build(BuildContext context) {
     return ModalProgressHUD(
@@ -30,44 +32,80 @@ class _PurchasePlanScreenState extends State<PurchasePlanScreen> {
                 height: 150,
               ),
               const SizedBox(height: 24),
-              Text('Thank You for Registration \nAs Seller on Alang World', style: AppFont.NUNITO_REGULAR_BLACK_18,),
-              const SizedBox(height: 24,),
-              Text('Our Customer Support Executive Will\nGet in touch with you in next 48 Hours\nfor necessary Verification & On Boarding...', style: AppFont.NUNITO_REGULAR_BLACK_14,),
-              const SizedBox(height: 24,),
+              Text(
+                'Thank You for Registration \nAs Seller on Alang World',
+                style: AppFont.NUNITO_REGULAR_BLACK_18,
+              ),
+              const SizedBox(
+                height: 24,
+              ),
+              Text(
+                'Our Customer Support Executive Will\nGet in touch with you in next 48 Hours\nfor necessary Verification & On Boarding...',
+                style: AppFont.NUNITO_REGULAR_BLACK_14,
+              ),
+              const SizedBox(
+                height: 24,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('Email:', style: AppFont.NUNITO_REGULAR_DARK_BLACK_16,),
+                  Text(
+                    'Email:',
+                    style: AppFont.NUNITO_REGULAR_DARK_BLACK_16,
+                  ),
                   const SizedBox(width: 2),
                   InkWell(
                     onTap: () {
                       _openUrl('mailto:${'support@alangworld.com'}');
                     },
-                    child: Text('support@alangworld.com', style: TextStyle(
-                      decoration: TextDecoration.underline,
-                      color: AppColors.colorBlue,
-                      fontSize: 16
-                    ),),
+                    child: Text(
+                      'support@alangworld.com',
+                      style: TextStyle(
+                          decoration: TextDecoration.underline,
+                          color: AppColors.colorBlue,
+                          fontSize: 16),
+                    ),
                   ),
                 ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('Mobile:', style: AppFont.NUNITO_REGULAR_DARK_BLACK_16,),
+                  Text(
+                    'Mobile:',
+                    style: AppFont.NUNITO_REGULAR_DARK_BLACK_16,
+                  ),
                   const SizedBox(width: 2),
                   InkWell(
                     onTap: () {
                       _openUrl('tel:${'+911111111111'}');
                     },
-                    child: Text('+91 1111111111', style: TextStyle(
-                        decoration: TextDecoration.underline,
-                        color: AppColors.colorBlue,
-                        fontSize: 16
-                    ),),
+                    child: Text(
+                      '+91 1111111111',
+                      style: TextStyle(
+                          decoration: TextDecoration.underline,
+                          color: AppColors.colorBlue,
+                          fontSize: 16),
+                    ),
                   ),
                 ],
-              )
+              ),
+              const SizedBox(height: 16),
+              InkWell(
+                onTap: () {
+                  NavKey.navKey.currentState!.pushAndRemoveUntil(
+                      MaterialPageRoute(
+                          builder: (_) => WithOutLoginNavigation(
+                                selectedIndex: 0,
+                              )),
+                      (route) => false);
+                },
+                child: const Text(
+                  'BACK TO HOME',
+                  style: TextStyle(decoration: TextDecoration.underline),
+                ),
+              ),
+              const SizedBox(height: 32),
             ],
           ),
         ),

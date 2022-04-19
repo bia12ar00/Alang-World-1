@@ -1,8 +1,12 @@
+import 'dart:convert';
+
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_native_timezone/flutter_native_timezone.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:provider/provider.dart';
+import 'package:sb_portal/service/network_repository.dart';
 import 'package:sb_portal/ui/auth/model/CommonModel.dart';
 import 'package:sb_portal/ui/auth/model/SignUpModel.dart';
 import 'package:sb_portal/ui/auth/provider/AuthProvider.dart';
@@ -19,6 +23,7 @@ import 'package:sb_portal/utils/app_string.dart';
 import 'package:sb_portal/utils/app_widgets.dart';
 import 'package:sb_portal/utils/common/EmailValidator.dart';
 import 'package:sb_portal/utils/preference_helper.dart';
+import 'package:http/http.dart' as http;
 
 class SellerSignUpScreen extends StatefulWidget {
   final bool? isFromSeller;
@@ -36,9 +41,11 @@ class _SellerSignUpScreenState extends State<SellerSignUpScreen> {
   final TextEditingController _companyNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
   final TextEditingController _mobileController = TextEditingController();
-  final TextEditingController _companyAddressController = TextEditingController();
+  final TextEditingController _companyAddressController =
+      TextEditingController();
   final TextEditingController _pinCodeController = TextEditingController();
   final TextEditingController _dateOfBirthController = TextEditingController();
   final FocusNode _nameFocus = FocusNode();
@@ -95,7 +102,11 @@ class _SellerSignUpScreenState extends State<SellerSignUpScreen> {
                     children: [
                       Column(
                         children: [
-                          Text(widget.isFromSeller! ? 'SELLER REGISTRATION' : 'BUYER REGISTRATION', style: AppFont.NUNITO_SEMI_BOLD_BLACK_24),
+                          Text(
+                              widget.isFromSeller!
+                                  ? 'SELLER REGISTRATION'
+                                  : 'BUYER REGISTRATION',
+                              style: AppFont.NUNITO_SEMI_BOLD_BLACK_24),
                           Container(
                             color: AppColors.colorBtnBlack,
                             width: 184,
@@ -111,7 +122,9 @@ class _SellerSignUpScreenState extends State<SellerSignUpScreen> {
                       ),
                     ],
                   ),
-                  widget.isFromSeller! ? const SizedBox(height: 58) : const SizedBox(height: 0),
+                  widget.isFromSeller!
+                      ? const SizedBox(height: 58)
+                      : const SizedBox(height: 0),
                   widget.isFromSeller!
                       ? AppWidgets.buildInputFields(
                           _companyNameController,
@@ -122,7 +135,9 @@ class _SellerSignUpScreenState extends State<SellerSignUpScreen> {
                           context,
                         )
                       : const SizedBox(),
-                  widget.isFromSeller! ? const SizedBox(height: 16) : const SizedBox(height: 48),
+                  widget.isFromSeller!
+                      ? const SizedBox(height: 16)
+                      : const SizedBox(height: 48),
                   AppWidgets.buildInputFields(
                     _nameController,
                     widget.isFromSeller! ? "Contact person name" : "Full Name",
@@ -174,7 +189,8 @@ class _SellerSignUpScreenState extends State<SellerSignUpScreen> {
                     ],
                   ),
                   const SizedBox(height: 16),
-                  AppWidgets.buildInputFields(_emailController, "Email Address", false, _emailFocus, _companyAddressFocus, context,
+                  AppWidgets.buildInputFields(_emailController, "Email Address",
+                      false, _emailFocus, _companyAddressFocus, context,
                       isEmailField: true),
                   const SizedBox(height: 16),
                   AppWidgets.buildInputFields(
@@ -188,10 +204,13 @@ class _SellerSignUpScreenState extends State<SellerSignUpScreen> {
                   const SizedBox(height: 16),
                   countryModel.results != null
                       ? DropdownButton<Countries>(
-                          hint: selectedCountry == null ? const Text('Country') : Text(selectedCountry!.name!),
+                          hint: selectedCountry == null
+                              ? const Text('Country')
+                              : Text(selectedCountry!.name!),
                           underline: Container(),
                           isExpanded: true,
-                          items: countryModel.results!.countries!.map((Countries value) {
+                          items: countryModel.results!.countries!
+                              .map((Countries value) {
                             return DropdownMenuItem<Countries>(
                               value: value,
                               child: Text(value.name!),
@@ -217,12 +236,15 @@ class _SellerSignUpScreenState extends State<SellerSignUpScreen> {
                         child: Column(
                           children: [
                             DropdownButton<States>(
-                              hint: selectedState == null ? const Text('State') : Text(selectedState!.name!),
+                              hint: selectedState == null
+                                  ? const Text('State')
+                                  : Text(selectedState!.name!),
                               underline: Container(),
                               isExpanded: true,
                               items: stateModel.results == null
                                   ? []
-                                  : stateModel.results!.states!.map((States value) {
+                                  : stateModel.results!.states!
+                                      .map((States value) {
                                       return DropdownMenuItem<States>(
                                         value: value,
                                         child: Text(value.name!),
@@ -248,12 +270,15 @@ class _SellerSignUpScreenState extends State<SellerSignUpScreen> {
                         child: Column(
                           children: [
                             DropdownButton<Cities>(
-                              hint: selectedCity == null ? const Text('City') : Text(selectedCity!.name!),
+                              hint: selectedCity == null
+                                  ? const Text('City')
+                                  : Text(selectedCity!.name!),
                               underline: Container(),
                               isExpanded: true,
                               items: cityModel.results == null
                                   ? []
-                                  : cityModel.results!.cities!.map((Cities value) {
+                                  : cityModel.results!.cities!
+                                      .map((Cities value) {
                                       return DropdownMenuItem<Cities>(
                                         value: value,
                                         child: Text(value.name!),
@@ -302,8 +327,13 @@ class _SellerSignUpScreenState extends State<SellerSignUpScreen> {
                         child: InkWell(
                           child: Column(
                             children: [
-                              AppWidgets.buildInputFieldsWithNumber(_dateOfBirthController,
-                                  widget.isFromSeller! ? "Company Registration Date" : "Date of Birth", false, _dobFocus, _passwordFocus, context,
+                              AppWidgets.buildInputFieldsWithNumber(
+                                  _dateOfBirthController,
+                                  "Date of Birth",
+                                  false,
+                                  _dobFocus,
+                                  _passwordFocus,
+                                  context,
                                   isEnable: false),
                               Container(
                                 height: 1,
@@ -325,7 +355,9 @@ class _SellerSignUpScreenState extends State<SellerSignUpScreen> {
                       : Column(
                           children: [
                             DropdownButton<String>(
-                              hint: selectGender == null ? const Text('Gender') : Text(selectGender!),
+                              hint: selectGender == null
+                                  ? const Text('Gender')
+                                  : Text(selectGender!),
                               underline: Container(),
                               isExpanded: true,
                               items: genderList.map((String value) {
@@ -372,7 +404,9 @@ class _SellerSignUpScreenState extends State<SellerSignUpScreen> {
                         children: [
                           InkWell(
                             child: Icon(
-                              value ? Icons.check_box : Icons.check_box_outline_blank,
+                              value
+                                  ? Icons.check_box
+                                  : Icons.check_box_outline_blank,
                             ),
                             onTap: () {
                               setState(() {
@@ -408,7 +442,10 @@ class _SellerSignUpScreenState extends State<SellerSignUpScreen> {
                       child: Container(
                         alignment: Alignment.center,
                         height: 40,
-                        child: MaterialButton(onPressed: null, child: Text('REGISTER', style: AppFont.NUNITO_BOLD_WHITE_24)),
+                        child: MaterialButton(
+                            onPressed: null,
+                            child: Text('REGISTER',
+                                style: AppFont.NUNITO_BOLD_WHITE_24)),
                       ),
                     ),
                     onTap: () {
@@ -436,18 +473,26 @@ class _SellerSignUpScreenState extends State<SellerSignUpScreen> {
   }
 
   Future<void> _selectDate(BuildContext context) async {
-    final DateTime? picked =
-        await showDatePicker(context: context, initialDate: selectedDate, firstDate: DateTime(1950, 1), lastDate: DateTime.now());
+    final DateTime? picked = await showDatePicker(
+        context: context,
+        initialDate: selectedDate,
+        firstDate: DateTime(1950, 1),
+        lastDate: DateTime.now());
     if (picked != null && picked != selectedDate) {
       setState(() {
         selectedDate = picked;
-        _dateOfBirthController.text = picked.day.toString() + "-" + picked.month.toString() + "-" + picked.year.toString();
+        _dateOfBirthController.text = picked.day.toString() +
+            "-" +
+            picked.month.toString() +
+            "-" +
+            picked.year.toString();
       });
     }
   }
 
   isValid() {
-    if (widget.isFromSeller! && _companyNameController.text.toString().trim().isEmpty) {
+    if (widget.isFromSeller! &&
+        _companyNameController.text.toString().trim().isEmpty) {
       Fluttertoast.showToast(msg: 'Please enter company name');
     } else if (_nameController.text.toString().trim().isEmpty) {
       Fluttertoast.showToast(msg: 'Please enter name');
@@ -457,7 +502,8 @@ class _SellerSignUpScreenState extends State<SellerSignUpScreen> {
       Fluttertoast.showToast(msg: 'Please enter valid mobile number');
     } else if (_emailController.text.toString().trim().isEmpty) {
       Fluttertoast.showToast(msg: 'Please enter email');
-    } else if (!EmailValidator.validate(_emailController.text.toString().trim())) {
+    } else if (!EmailValidator.validate(
+        _emailController.text.toString().trim())) {
       Fluttertoast.showToast(msg: 'Please enter valid email');
     } else if (_companyAddressController.text.toString().trim().isEmpty) {
       Fluttertoast.showToast(msg: 'Please enter company address');
@@ -477,73 +523,89 @@ class _SellerSignUpScreenState extends State<SellerSignUpScreen> {
       Fluttertoast.showToast(msg: 'Please enter password');
     } else if (_confirmPasswordController.text.toString().trim().isEmpty) {
       Fluttertoast.showToast(msg: 'Please enter confirm password');
-    } else if (_passwordController.text.toString().trim() != _confirmPasswordController.text.toString().trim()) {
-      Fluttertoast.showToast(msg: 'Password and confirm password dose not match');
+    } else if (_passwordController.text.toString().trim() !=
+        _confirmPasswordController.text.toString().trim()) {
+      Fluttertoast.showToast(
+          msg: 'Password and confirm password dose not match');
     } else if (!value) {
       Fluttertoast.showToast(msg: 'Please select term and condition');
     } else {
+      sendOtp(_mobileController.text);
       callSignUpApi();
+      setState(() {
+        otpNumber = _mobileController.text.toString();
+      });
     }
   }
 
   callSignUpApi() async {
     var connectivityResult = await (Connectivity().checkConnectivity());
-    if (connectivityResult == ConnectivityResult.mobile || connectivityResult == ConnectivityResult.wifi) {
-      String? firebaseToken = await FirebaseNotificationHelper.getInstance().getFcmToken();
+    if (connectivityResult == ConnectivityResult.mobile ||
+        connectivityResult == ConnectivityResult.wifi) {
+      String? firebaseToken =
+          await FirebaseNotificationHelper.getInstance().getFcmToken();
 
       Map<String, String> body = widget.isFromSeller!
           ? {
               APPStrings.paramName: _nameController.text.toString().trim(),
               APPStrings.paramEmail: _emailController.text.toString().trim(),
-              APPStrings.paramPassword: _passwordController.text.toString().trim(),
-              APPStrings.paramCPassword: _confirmPasswordController.text.toString().trim(),
+              APPStrings.paramPassword:
+                  _passwordController.text.toString().trim(),
+              APPStrings.paramCPassword:
+                  _confirmPasswordController.text.toString().trim(),
               APPStrings.paramType: widget.isFromSeller! ? 'seller' : 'buyer',
               APPStrings.paramMobile: _mobileController.text.toString(),
-              APPStrings.paramCompany: _companyNameController.text.toString().trim(),
-              APPStrings.paramPincode: _pinCodeController.text.toString().trim(),
-              APPStrings.paramAddress: _companyAddressController.text.toString().trim(),
+              APPStrings.paramCompany:
+                  _companyNameController.text.toString().trim(),
+              APPStrings.paramPincode:
+                  _pinCodeController.text.toString().trim(),
+              APPStrings.paramAddress:
+                  _companyAddressController.text.toString().trim(),
               APPStrings.paramDistrict: selectedCity!.name!,
               APPStrings.paramState: selectedState!.name!,
               APPStrings.paramCountry: selectedCountry!.name!,
-              APPStrings.paramEstablishmentDate: _dateOfBirthController.text.toString(),
+              APPStrings.paramEstablishmentDate:
+                  _dateOfBirthController.text.toString(),
               APPStrings.paramFirebaseId: firebaseToken!,
             }
           : {
               APPStrings.paramName: _nameController.text.toString().trim(),
               APPStrings.paramEmail: _emailController.text.toString().trim(),
-              APPStrings.paramPassword: _passwordController.text.toString().trim(),
-              APPStrings.paramCPassword: _confirmPasswordController.text.toString().trim(),
+              APPStrings.paramPassword:
+                  _passwordController.text.toString().trim(),
+              APPStrings.paramCPassword:
+                  _confirmPasswordController.text.toString().trim(),
               APPStrings.paramType: widget.isFromSeller! ? 'seller' : 'buyer',
               APPStrings.paramMobile: _mobileController.text.toString(),
-              APPStrings.paramPincode: _pinCodeController.text.toString().trim(),
-              APPStrings.paramAddress: _companyAddressController.text.toString().trim(),
+              APPStrings.paramPincode:
+                  _pinCodeController.text.toString().trim(),
+              APPStrings.paramAddress:
+                  _companyAddressController.text.toString().trim(),
               APPStrings.paramDistrict: selectedCity!.name!,
               APPStrings.paramState: selectedState!.name!,
               APPStrings.paramCountry: selectedCountry!.name!,
-              APPStrings.paramEstablishmentDate: _dateOfBirthController.text.toString(),
+              APPStrings.paramEstablishmentDate:
+                  _dateOfBirthController.text.toString(),
               APPStrings.paramGender: selectGender!,
               APPStrings.paramFirebaseId: firebaseToken!,
             };
 
       mAuthProvider!.signUp(body).then((value) {
-        if (value != null) {
-          try {
-            CommonModel streams = CommonModel.fromJson(value);
-            if (streams.response != null && streams.response == "error") {
-              Fluttertoast.showToast(msg: streams.message);
-            } else {
-              SignUpModel signUpModel = SignUpModel.fromJson(value);
-              Fluttertoast.showToast(msg: signUpModel.message!);
-              PreferenceHelper.setString(PreferenceHelper.AUTH_TOKEN, signUpModel.results!.user!.userDetails!.token!);
-              NavKey.navKey.currentState!.push(MaterialPageRoute(
-                  builder: (_) => SellerOtpVerifyScreen(
-                        isFromSeller: widget.isFromSeller!,
-                      )));
-            }
-          } catch (ex) {
-            Fluttertoast.showToast(msg: APPStrings.INTERNAL_SERVER_ISSUE);
+        try {
+          CommonModel streams = CommonModel.fromJson(value);
+          if (streams.response != null && streams.response == "error") {
+            Fluttertoast.showToast(msg: streams.message);
+          } else {
+            SignUpModel signUpModel = SignUpModel.fromJson(value);
+            Fluttertoast.showToast(msg: signUpModel.message!);
+            PreferenceHelper.setString(PreferenceHelper.AUTH_TOKEN,
+                signUpModel.results!.user!.userDetails!.token!);
+            NavKey.navKey.currentState!.push(MaterialPageRoute(
+                builder: (_) => SellerOtpVerifyScreen(
+                      isFromSeller: widget.isFromSeller!,
+                    )));
           }
-        } else {
+        } catch (ex) {
           Fluttertoast.showToast(msg: APPStrings.INTERNAL_SERVER_ISSUE);
         }
       });
@@ -552,9 +614,37 @@ class _SellerSignUpScreenState extends State<SellerSignUpScreen> {
     }
   }
 
+  sendOtp(String mobile) async {
+    Map<String, dynamic> params = {"mobile": mobile};
+    String _timezone = await FlutterNativeTimezone.getLocalTimezone();
+    commonHeaders['timezone'] = _timezone;
+    commonHeaders['Authorization'] =
+        "Bearer " + PreferenceHelper.getString(PreferenceHelper.AUTH_TOKEN);
+
+    printWrapped(
+        "Bearer--" + PreferenceHelper.getString(PreferenceHelper.AUTH_TOKEN));
+    printWrapped("baseUrl--" + APPStrings.baseUrl + "send_otp");
+    printWrapped("baseUrl--body-" + params.toString());
+    printWrapped("baseUrl--commonHeaders-" + commonHeaders.toString());
+
+    var response = await http.post(Uri.parse(APPStrings.baseUrl + "send_otp"),
+        body: params, headers: commonHeaders);
+
+    Map<String, dynamic> data = jsonDecode(response.body);
+    String verse = data["results"]["OTPSession"];
+    print("sessionID:- $verse");
+
+    sessionID = verse;
+    setState(() {});
+    // SendOtpModel commonModel = SendOtpModel.fromJson(data);
+    // sessionID = commonModel.results!.oTPSession;
+    // print(commonModel);
+  }
+
   callCountryListApi() async {
     var connectivityResult = await (Connectivity().checkConnectivity());
-    if (connectivityResult == ConnectivityResult.mobile || connectivityResult == ConnectivityResult.wifi) {
+    if (connectivityResult == ConnectivityResult.mobile ||
+        connectivityResult == ConnectivityResult.wifi) {
       mAuthProvider!.getCountryList().then((value) {
         if (value != null) {
           try {
@@ -579,8 +669,11 @@ class _SellerSignUpScreenState extends State<SellerSignUpScreen> {
 
   callStateListApi() async {
     var connectivityResult = await (Connectivity().checkConnectivity());
-    if (connectivityResult == ConnectivityResult.mobile || connectivityResult == ConnectivityResult.wifi) {
-      Map<String, String> body = {APPStrings.paramCountry: selectedCountry!.name!};
+    if (connectivityResult == ConnectivityResult.mobile ||
+        connectivityResult == ConnectivityResult.wifi) {
+      Map<String, String> body = {
+        APPStrings.paramCountry: selectedCountry!.name!
+      };
       mAuthProvider!.getStateList(body).then((value) {
         if (value != null) {
           try {
@@ -605,7 +698,8 @@ class _SellerSignUpScreenState extends State<SellerSignUpScreen> {
 
   callCityListApi() async {
     var connectivityResult = await (Connectivity().checkConnectivity());
-    if (connectivityResult == ConnectivityResult.mobile || connectivityResult == ConnectivityResult.wifi) {
+    if (connectivityResult == ConnectivityResult.mobile ||
+        connectivityResult == ConnectivityResult.wifi) {
       Map<String, String> body = {APPStrings.paramState: selectedState!.name!};
       mAuthProvider!.getCityList(body).then((value) {
         if (value != null) {
