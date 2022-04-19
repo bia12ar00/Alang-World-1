@@ -43,6 +43,23 @@ class AuthProvider extends ChangeNotifier {
     });
   }
 
+
+  Future<Map<String, dynamic>> sendOtp(Map<String, dynamic> params) {
+    isRequestSend = true;
+    notifyListeners();
+    return api.callPostMethod(mContext!, APPStrings.apiSendOtp, params).then((value) {
+      isRequestSend = false;
+      notifyListeners();
+      Map<String, dynamic> data = jsonDecode(value);
+      return data;
+    }).catchError((e) {
+      isRequestSend = false;
+      notifyListeners();
+      throw e;
+    });
+  }
+
+
   Future<Map<String, dynamic>> login(Map<String, dynamic> params) {
     isRequestSend = true;
     notifyListeners();

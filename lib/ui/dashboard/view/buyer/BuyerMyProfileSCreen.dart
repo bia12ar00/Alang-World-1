@@ -33,6 +33,7 @@ class _BuyerMyProfileScreenState extends State<BuyerMyProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    //print( myProfileModel.results!.profile!.establishment_date ?? "");
     mHomeProvider = Provider.of<HomeProvider>(context);
     return SafeArea(
       child: ModalProgressHUD(
@@ -119,9 +120,7 @@ class _BuyerMyProfileScreenState extends State<BuyerMyProfileScreen> {
                                       const SizedBox(width: 12),
                                       Expanded(
                                         child: Text(
-                                          myProfileModel.results!.profile!
-                                                  .establishment_date ??
-                                              "",
+                                          myProfileModel.results!.profile!.createdAt!,
                                           style:
                                               AppFont.NUNITO_SEMI_BOLD_BLACK_16,
                                         ),
@@ -319,7 +318,6 @@ class _BuyerMyProfileScreenState extends State<BuyerMyProfileScreen> {
               myProfileModel = MyProfileModel.fromJson(value);
             }
           } catch (ex) {
-            print(ex);
             Fluttertoast.showToast(msg: APPStrings.INTERNAL_SERVER_ISSUE);
           }
         } else {

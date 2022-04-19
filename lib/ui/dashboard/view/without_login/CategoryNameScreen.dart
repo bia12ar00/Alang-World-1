@@ -8,6 +8,7 @@ import 'package:sb_portal/ui/auth/view/SellerLogin.dart';
 import 'package:sb_portal/ui/dashboard/model/ProductListModel.dart';
 import 'package:sb_portal/ui/dashboard/model/WIthOutLoginProductListModel.dart';
 import 'package:sb_portal/ui/dashboard/provider/HomeProvider.dart';
+import 'package:sb_portal/ui/dashboard/view/notification.dart';
 import 'package:sb_portal/ui/dashboard/view/without_login/widget/WithOutLoginSidemenu.dart';
 import 'package:sb_portal/utils/app_colors.dart';
 import 'package:sb_portal/utils/app_font.dart';
@@ -59,7 +60,9 @@ class _CategoryNameScreenState extends State<CategoryNameScreen> {
                     IconButton(
                       color: Colors.black,
                       icon: const Icon(Icons.notifications),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(builder: (_) => const NotificationPage()));
+                      },
                     ),
                   ],
                 ),

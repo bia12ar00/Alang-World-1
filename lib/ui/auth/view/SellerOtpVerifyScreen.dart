@@ -240,8 +240,8 @@ class _SellerOtpVerifyScreenState extends State<SellerOtpVerifyScreen> {
         APPStrings.paramOtp: smsOTP!,
         APPStrings.paramType: 'seller',
       };
-
       mAuthProvider!.verifyOtp(body).then((value) {
+        print(value);
         if (value != null) {
           try {
             CommonModel streams = CommonModel.fromJson(value);

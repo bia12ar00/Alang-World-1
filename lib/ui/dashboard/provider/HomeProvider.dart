@@ -109,6 +109,8 @@ class HomeProvider extends ChangeNotifier {
       isRequestSend = false;
       notifyListeners();
       Map<String, dynamic> data = jsonDecode(value);
+      print("helooo");
+      print(data);
       return data;
     }).catchError((e) {
       isRequestSend = false;

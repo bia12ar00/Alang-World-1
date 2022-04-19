@@ -8,6 +8,7 @@ class APPStrings {
   //API Data
   static const String apiRegister = 'register';
   static const String apiVerifyOtp = 'verify-otp';
+  static const String apiSendOtp = 'send_otp';
   static const String apiLogin = 'login';
   static const String apiGetPlan = 'get_plan';
   static const String apiSelectPlan = 'select_plan';

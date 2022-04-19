@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sb_portal/ui/dashboard/view/HomeNavigationScreen.dart';
+import 'package:sb_portal/ui/dashboard/view/notification.dart';
 import 'package:sb_portal/ui/dashboard/view/widgets/SideMenu.dart';
 import 'package:sb_portal/utils/NavKey.dart';
 import 'package:sb_portal/utils/app_colors.dart';
@@ -36,7 +37,9 @@ class _AlangWorldScreenState extends State<AlangWorldScreen> {
                   IconButton(
                     color: Colors.black,
                     icon: const Icon(Icons.notifications),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(builder: (_) => const NotificationPage()));
+                    },
                   ),
                 ],
               ),

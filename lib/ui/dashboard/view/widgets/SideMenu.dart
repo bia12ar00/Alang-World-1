@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sb_portal/ui/auth/view/LandingScreen.dart';
 import 'package:sb_portal/ui/dashboard/view/AlangWorldScreen.dart';
 import 'package:sb_portal/ui/dashboard/view/ConatctUsScreen.dart';
 import 'package:sb_portal/ui/dashboard/view/HomeNavigationScreen.dart';

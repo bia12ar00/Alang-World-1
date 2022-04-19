@@ -9,12 +9,8 @@ import 'package:sb_portal/ui/auth/model/CommonModel.dart';
 import 'package:sb_portal/ui/dashboard/model/MyProfileModel.dart';
 import 'package:sb_portal/ui/dashboard/provider/HomeProvider.dart';
 import 'package:sb_portal/ui/dashboard/view/EditProfileScreen.dart';
-import 'package:sb_portal/ui/dashboard/view/SellerChangePasswordScreen.dart';
-import 'package:sb_portal/ui/dashboard/view/widgets/SideMenu.dart';
-import 'package:sb_portal/utils/NavKey.dart';
 import 'package:sb_portal/utils/app_colors.dart';
 import 'package:sb_portal/utils/app_font.dart';
-import 'package:sb_portal/utils/app_images.dart';
 import 'package:sb_portal/utils/app_string.dart';
 
 class MyProfileScreen extends StatefulWidget {
@@ -84,7 +80,10 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                                     Navigator.of(context).push(
                                         MaterialPageRoute(
                                             builder: (_) =>
-                                                const EditProfileScreen()));
+                                                 EditProfileScreen(
+                                                    myProfileModel:myProfileModel
+                                                )));
+                                    callMyProfileApi();
                                   },
                                   child: Container(
                                     height: 25,
@@ -175,9 +174,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                                 ),
                                 const SizedBox(width: 10),
                                 Text(
-                                  myProfileModel.results?.profile
-                                          ?.establishment_date ??
-                                      "",
+                                  myProfileModel.results!.profile!.establishment_date!,
                                   style: AppFont.NUNITO_SEMI_BOLD_BLACK_16,
                                 ),
                               ],

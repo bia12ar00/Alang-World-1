@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -7,7 +6,6 @@ import 'package:intl/intl.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:provider/provider.dart';
 import 'package:sb_portal/ui/auth/model/CommonModel.dart';
-import 'package:sb_portal/ui/auth/model/SignUpModel.dart';
 import 'package:sb_portal/ui/auth/provider/AuthProvider.dart';
 import 'package:sb_portal/ui/dashboard/model/CityModel.dart';
 import 'package:sb_portal/ui/dashboard/model/CountryModel.dart';
@@ -76,7 +74,8 @@ class _BuyerEditProfileScreenState extends State<BuyerEditProfileScreen> {
     _companyAddressController.text =
         widget.myProfileModel!.results!.profile!.address!;
     _pinCodeController.text = widget.myProfileModel!.results!.profile!.pincode!;
-    // _dateOfBirthController.text = widget.myProfileModel!.results!.profile!.createdAt!;
+    _dateOfBirthController.text =
+        widget.myProfileModel!.results!.profile!.createdAt!;
     selectGender = widget.myProfileModel!.results!.profile!.gender!;
     genderList.add('Male');
     genderList.add('Female');
@@ -469,6 +468,8 @@ class _BuyerEditProfileScreenState extends State<BuyerEditProfileScreen> {
         APPStrings.paramState: selectedState!.name!,
         APPStrings.paramCountry: selectedCountry!.name!,
         APPStrings.paramEstablishmentDate: DateFormat('yyyy-MM-dd').format(
+            DateFormat('dd-MM-yyyy').parse(_dateOfBirthController.text)),
+        "date_of_birth": DateFormat('yyyy-MM-dd').format(
             DateFormat('dd-MM-yyyy').parse(_dateOfBirthController.text)),
         APPStrings.paramGender: selectGender!,
         APPStrings.paramCompany: "Krishna Softweb",

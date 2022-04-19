@@ -63,7 +63,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   @override
   void initState() {
     callCountryListApi();
-    print(callCountryListApi);
    _nameController.text = widget.myProfileModel!.results!.profile!.name!;
    _mobileController.text = widget.myProfileModel!.results!.profile!.mobile!;
    _emailController.text = widget.myProfileModel!.results!.profile!.email!;
@@ -372,6 +371,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         ),
                         const SizedBox(height: 32),
                         GestureDetector(
+                          onTap: _isValid,
                           child: Material(
                             elevation: 0.0,
                             borderRadius: BorderRadius.circular(8),
@@ -382,9 +382,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               child: Text('UPDATE', style: AppFont.NUNITO_BOLD_WHITE_24),
                             ),
                           ),
-                          onTap: () {
-                            isValid();
-                          },
                         ),
                         const SizedBox(height: 32),
                       ],
@@ -410,7 +407,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     }
   }
 
-  isValid() {
+  void _isValid() {
     if (_nameController.text.toString().trim().isEmpty) {
       Fluttertoast.showToast(msg: 'Please enter name');
     } else if (_mobileController.text.toString().trim().isEmpty) {
@@ -464,6 +461,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           try {
             CommonModel streams = CommonModel.fromJson(value);
             if (streams.response != null && streams.response == "success") {
+              Navigator.of(context).pop(body);
               Fluttertoast.showToast(msg: streams.message);
             } else {
               SignUpModel signUpModel = SignUpModel.fromJson(value);

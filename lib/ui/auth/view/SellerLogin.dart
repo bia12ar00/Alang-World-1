@@ -8,6 +8,7 @@ import 'package:sb_portal/ui/auth/model/CommonModel.dart';
 import 'package:sb_portal/ui/auth/model/SignUpModel.dart';
 import 'package:sb_portal/ui/auth/provider/AuthProvider.dart';
 import 'package:sb_portal/ui/auth/view/SellerSignUpScreen.dart';
+import 'package:sb_portal/ui/auth/view/send_otp.dart';
 import 'package:sb_portal/ui/dashboard/view/HomeNavigationScreen.dart';
 import 'package:sb_portal/ui/dashboard/view/sales_admin/SellerAdminHomeNavigationScreen.dart';
 import 'package:sb_portal/ui/dashboard/view/buyer/BuyerHomeScreenNavigation.dart';
@@ -19,7 +20,6 @@ import 'package:sb_portal/utils/app_font.dart';
 import 'package:sb_portal/utils/app_images.dart';
 import 'package:sb_portal/utils/app_string.dart';
 import 'package:sb_portal/utils/app_widgets.dart';
-import 'package:sb_portal/utils/common/EmailValidator.dart';
 import 'package:sb_portal/utils/preference_helper.dart';
 
 class SellerLogin extends StatefulWidget {
@@ -176,7 +176,7 @@ class _SellerLoginState extends State<SellerLogin> {
                       ),
                       onTap: () {
                         NavKey.navKey.currentState!.push(MaterialPageRoute(
-                            builder: (_) => SellerSignUpScreen(
+                            builder: (_) => SendOtp(
                                   isFromSeller: widget.isFromSeller!,
                                 )));
                       },
